@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Robot</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <div class="container h-100">
+
+        <div class="row h-100">
+            <button type="button" class="btn btn-warning col" data-toggle="modal"
+                data-target=".bd-example-modal-lg">Ayuda</button>
+            <button id="nivel1" class="nivel btn btn-primary col">Nivel 1</button>
+            <button id="nivel2" class="nivel btn btn-info col">Nivel 2</button>
+            <button id="nivel3" class="nivel btn btn-primary col">Nivel 3</button>
+            <button id="nivel4" class="nivel btn btn-info col">Nivel 4</button>
+            <button id="nivel5" class="nivel btn btn-primary col">Nivel 5</button>
+            <button id="nivel6" class="nivel btn btn-info col">Nivel 6</button>
+            <button id="nivel7" class="nivel btn btn-primary col">Nivel 7</button>
+            <button id="nivel8" class="nivel btn btn-info col">Nivel 8</button>
+            <button id="nivel9" class="nivel btn btn-primary col">Nivel 9</button>
+            <button id="nivel10" class="nivel btn btn-info col">Nivel 10 </button>
+            <button id="nivel11" class="nivel btn btn-primary col">Nivel 11 </button>
+            <button id="nivel12" class="nivel btn btn-info col">Nivel 12 </button>
+            <button id="nivel13" class="nivel btn btn-primary col">Nivel 13 </button>
+
+
+
+
+            <!-- <table id="tabla" class="col-12 col-md-9 m-0 table table-bordered table-light"></table>-->
+            <div class="rounded p-2 col-12 col-md-9 m-0 bg-light row align-items-center justify-content-center">
+                <div id="tabla"></div>
+            </div>
+            <div  class="col-12 col-md-3 bg-light">
+                <textarea id="texto"></textarea>
+                <pre id="textoColor"></pre>
+            </div>
+            <button id="btniniciar" class="h-10 col-12 btn btn-success">Iniciar</button>
+        </div>
+
+    </div>
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Ayuda</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="row p-4">
+
+                    <div class="col-12 col-md-3">
+                        <p><strong>Significado iconos</strong></p>
+                        <p>Entrada: ☝🏻</p>
+                        <p>Salida: 🚩</p>
+                        <p>Mina: 📍</p>
+                        <p>Obstáculos: 🌲 🗿 ⛲ 🏰 🏠</p>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <p><strong>Condiciones</strong></p>
+                        <p>NB: detecta cuando no hay bloque</p>
+                        <p>MINE: detecta cuando hay una mina</p>
+                        <p>BLOCK: detecta cuando hay algo bloqueando el paso</p>
+                        <p>NW: detecta si no has llegado al muro</p>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <p><strong>Sentencias</strong></p>
+                        <p>A: Avanza un bloque</p>
+                        <p>TL: Gira a la izquierda</p>
+                        <p>TR: Gira a la derecha</p>
+                        <p>DEACT: Desactiva una mina</p>
+                    </div>
+
+                    <div class="col-12 col-md-3">
+                        <p><strong>Variables</strong></p>
+                        <p>Inicialización: nombre=número</p>
+                        <p>Suma: nombre++</p>
+                        <p>Resta: nombre--</p>
+                        <p>Impresión: print nombre</p>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <p><strong>Bucles</strong></p>
+                        <p>WHILE: Estructura: while (condición) (sentencias) end</p>
+                        <p>FOR: Estructura: for (número) (sentencias) end</p>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <p><strong>Condicional</strong></p>
+                        <p>IF: Estructura: if (condición) then (sentencias) end</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="js/confetti.min.js"></script>
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
