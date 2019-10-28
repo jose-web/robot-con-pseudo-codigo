@@ -60,11 +60,26 @@ var robot = {
             clearInterval(reloj.intervalo);
             document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
 
-            confetti.start();
+            let contadorMinasFinal = 0;
+            for (let i = 0; i < tableroVirtual.length; i++) {
+                for (let o = 0; o < tableroVirtual[i].length; o++) {
+                    if (tableroVirtual[i][o] == "📍") {
+                        contadorMinasFinal++;
+                    }
 
-            setTimeout(function () {
-                confetti.stop();
-            }, 4000);
+                }
+
+            }
+
+            if (contadorMinasFinal > 0) {
+                mensajeError("Faltan " + contadorMinasFinal + " minas por desactivar");
+            } else {
+                confetti.start();
+
+                setTimeout(function () {
+                    confetti.stop();
+                }, 4000);
+            }
 
         } else {
 

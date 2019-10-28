@@ -16,39 +16,35 @@
     <div class="container h-100">
 
         <div class="row h-100">
+
+            <!--BOTONES-->
             <button type="button" class="btn btn-warning col" data-toggle="modal"
                 data-target=".bd-example-modal-lg">Ayuda</button>
-            <button id="nivel1" class="nivel btn btn-primary col">Nivel 1</button>
-            <button id="nivel2" class="nivel btn btn-info col">Nivel 2</button>
-            <button id="nivel3" class="nivel btn btn-primary col">Nivel 3</button>
-            <button id="nivel4" class="nivel btn btn-info col">Nivel 4</button>
-            <button id="nivel5" class="nivel btn btn-primary col">Nivel 5</button>
-            <button id="nivel6" class="nivel btn btn-info col">Nivel 6</button>
-            <button id="nivel7" class="nivel btn btn-primary col">Nivel 7</button>
-            <button id="nivel8" class="nivel btn btn-info col">Nivel 8</button>
-            <button id="nivel9" class="nivel btn btn-primary col">Nivel 9</button>
-            <button id="nivel10" class="nivel btn btn-info col">Nivel 10 </button>
-            <button id="nivel11" class="nivel btn btn-primary col">Nivel 11 </button>
-            <button id="nivel12" class="nivel btn btn-info col">Nivel 12 </button>
-            <button id="nivel13" class="nivel btn btn-primary col">Nivel 13 </button>
+            <button id="nivelAnterior" class="col btn btn-primary">Nivel anterior</button>
+            <div class="col bg-primary"><button id="nombreNivel" class="btn btn-primary h-100 w-100" disabled>Nivel
+                    1</button>
+            </div>
+            <button id="siguienteNivel" class="col btn btn-primary ">Siguiente nivel</button>
 
-
-
-
-            <!-- <table id="tabla" class="col-12 col-md-9 m-0 table table-bordered table-light"></table>-->
-            <div class="rounded p-2 col-12 col-md-9 m-0 bg-light row align-items-center justify-content-center">
+            <!--TABLA-->
+            <div class="p-2 col-12 col-md-9 m-0 bg-light row align-items-center justify-content-center">
                 <div id="tabla"></div>
             </div>
-            <div  class="col-12 col-md-3 bg-light">
-                <textarea id="texto"></textarea>
-                <pre id="textoColor"></pre>
+
+            <!--CÓDIGO-->
+            <div class="col-12 col-md-3 bg-light">
+                <textarea id="texto" spellcheck=false></textarea>
+                <pre id="textoColor" class="shadow"></pre>
             </div>
+
+            <!--BOTÓN INICIAR-->
             <button id="btniniciar" class="h-10 col-12 btn btn-success">Iniciar</button>
         </div>
 
     </div>
 
 
+    <!--AYUDA-->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -64,7 +60,7 @@
 
                     <div class="col-12 col-md-3">
                         <p><strong>Significado iconos</strong></p>
-                        <p>Entrada: ☝🏻</p>
+                        <p>Entrada: 👆</p>
                         <p>Salida: 🚩</p>
                         <p>Mina: 📍</p>
                         <p>Obstáculos: 🌲 🗿 ⛲ 🏰 🏠</p>
@@ -111,7 +107,7 @@
     </div>
 
 
-
+    <!--SCRIPTS-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

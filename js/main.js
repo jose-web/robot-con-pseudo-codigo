@@ -85,26 +85,48 @@ Carga la página
 window.onload = function () {
     robot.spawn();
 
+    document.getElementById("texto").value = "";
+
     document.getElementById("btniniciar").onclick = function () {
         iniciar();
     };
 
-    let seleccionNivel = document.getElementsByClassName('nivel');
-    for (let i = 0; i < seleccionNivel.length; i++) {
-        let seleccionNivelFinal = seleccionNivel[i];
-        seleccionNivelFinal.onclick = function () {
-            let numNivel = this.id.substring(5, this.id.length) - 1 + 1;
-            nivel = numNivel;
-            nivelTablero();
-        }
-    }
+    /*
+      let seleccionNivel = document.getElementsByClassName('nivel');
+      for (let i = 0; i < seleccionNivel.length; i++) {
+          let seleccionNivelFinal = seleccionNivel[i];
+          seleccionNivelFinal.onclick = function () {
+              let numNivel = this.id.substring(5, this.id.length) - 1 + 1;
+              nivel = numNivel;
+              nivelTablero();
+          }
+      }
+  
+    */
+
+    document.getElementById('siguienteNivel').onclick = function () {
+        nivel = nivel == 13 ? nivel : nivel + 1;
+        document.getElementById("nombreNivel").innerHTML = "Nivel " + nivel
+        clearInterval(reloj.intervalo);
+        document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
+        nivelTablero();
+    };
+
+    document.getElementById('nivelAnterior').onclick = function () {
+        nivel = nivel == 1 ? nivel : nivel - 1;
+        document.getElementById("nombreNivel").innerHTML = "Nivel " + nivel
+        clearInterval(reloj.intervalo);
+        document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
+        nivelTablero();
+    };
+
 
 
     document.getElementById("texto").onkeyup = function () {
         let textoSinColor = this.value.toString();
         let nuevoTextoColor = textoSinColor;
 
-        nuevoTextoColor = nuevoTextoColor.replace(/while|for|if|end/gi, "<textoColor style='color:blue'><b>$&</b></textoColor>");
+        nuevoTextoColor = nuevoTextoColor.replace(/while|for|if|then|end/gi, "<textoColor style='color:blue'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/0|1|2|3|4|5|6|7|8|9/g, "<textoColor style='color:brown'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/nb|mine|block|nw/gi, "<textoColor style='color:violet'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/a|tl|tr|deact/gi, "<textoColor style='color:green'><b>$&</b></textoColor>");

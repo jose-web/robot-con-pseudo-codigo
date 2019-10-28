@@ -9,6 +9,10 @@ function compruebaSintaxis($codigo) {
 
         contador = 0;
 
+        if (typeof (arrayTexto[0]) == "undefined") {
+            break;
+        }
+
 
         //////////////////////////////////////////////////////
         ////////////////////// Variables /////////////////////
@@ -29,6 +33,8 @@ function compruebaSintaxis($codigo) {
                 for (let i = 0; i < compruebaTodo.length; i++) {
                     for (let o = 0; o < compruebaTodo[i].length; o++) {
                         if (declaracion[0] == compruebaTodo[i][o]) {
+                            mensajeError("'" + declaracion[0] + "' no puede ser una variable");
+                            error = true;
                             return false;
                         }
                     }
@@ -56,6 +62,8 @@ function compruebaSintaxis($codigo) {
                 for (let i = 0; i < compruebaTodo.length; i++) {
                     for (let o = 0; o < compruebaTodo[i].length; o++) {
                         if (arrayTexto[0] == compruebaTodo[i][o]) {
+                            mensajeError("'" + arrayTexto[0] + "' no puede ser una variable");
+                            error = true;
                             return false;
                         }
                     }
@@ -79,9 +87,9 @@ function compruebaSintaxis($codigo) {
         if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
             let contadorvar = 0;
 
-            variables.forEach(valor => {
+            let nombreVariable = arrayTexto[0].slice(0, arrayTexto[0].length - 2);
 
-                let nombreVariable = arrayTexto[0].slice(0, arrayTexto[0].length - 2);
+            variables.forEach(valor => {
 
                 if (nombreVariable == valor) {
                     $codigo.push(arrayTexto[0]);
@@ -93,6 +101,8 @@ function compruebaSintaxis($codigo) {
             });
 
             if (contadorvar == variables.length) {
+                mensajeError("'" + nombreVariable + "' no es una variable");
+                error = true;
                 return false;
             }
         }
@@ -102,8 +112,6 @@ function compruebaSintaxis($codigo) {
             let contadorvar = 0;
 
             variables.forEach(valor => {
-
-
 
                 if (arrayTexto[0] == valor) {
                     $codigo.push(arrayTexto[0]);
@@ -118,6 +126,8 @@ function compruebaSintaxis($codigo) {
             });
 
             if (contadorvar == variables.length) {
+                mensajeError("'" + arrayTexto[0] + "' no es una variable");
+                error = true;
                 return false;
             }
         }
@@ -141,6 +151,8 @@ function compruebaSintaxis($codigo) {
             });
 
             if (contadorvar == variables.length) {
+                mensajeError("'" + arrayTexto[1] + "' no es una variable");
+                error = true;
                 return false;
             }
         }
@@ -176,10 +188,17 @@ function compruebaSintaxis($codigo) {
 
                 let contadorCondicion = 0;
 
-                if (arrayTexto[0] == "for" && Number.isInteger(arrayTexto[1] - 1)) {
+                if (arrayTexto[0] == "for") {
+                    if (Number.isInteger(arrayTexto[1] - 1)) {
+                        $codigo[numBucle].push(arrayTexto[1]);
+                        arrayTexto.shift();
+                    } else {
+                        mensajeError("falta condicion en el " + arrayTexto[0]);
+                        error = true;
+                        return false;
+                    }
 
-                    $codigo[numBucle].push(arrayTexto[1]);
-                    arrayTexto.shift();
+
                 } else if (arrayTexto[0] == "while") {
                     for (let o = 0; o < condicion.length; o++) {
                         if (condicion[o] == arrayTexto[1]) {
@@ -206,16 +225,14 @@ function compruebaSintaxis($codigo) {
                     }
                 }
 
-
+                if (contadorCondicion == condicion.length) {
+                    mensajeError("falta condicion en el " + arrayTexto[0]);
+                    error = true;
+                    return false;
+                }
 
                 arrayTexto.shift();
 
-
-
-                if (contadorCondicion == condicion.length) {
-                    mensajeError("falta condicion");
-                    return false;
-                }
 
                 compruebaSintaxis($codigo[numBucle]);
                 break;
@@ -224,9 +241,6 @@ function compruebaSintaxis($codigo) {
         }
 
 
-        if (typeof (arrayTexto[0]) == "undefined") {
-            break;
-        }
 
         if (contadorBucle > 0 && arrayTexto[0] == "end") {
             arrayTexto.shift();
@@ -243,14 +257,17 @@ function compruebaSintaxis($codigo) {
         if (endSolo) {
             mensajeError("Se ha encontrado un 'end' sin bucle");
             error = true;
+            return false;
 
         } else if (bucleSinCerrar) {
             mensajeError("Se " + (contadorBucle > 1 ? "han" : "ha") + " encontrado " + contadorBucle + (contadorBucle > 1 ? " bucles" : " bucle") + " sin cerrar");
             error = true;
+            return false;
 
         } else if (sentenciaMalEscrita) {
             mensajeError("error de sintaxis en: " + arrayTexto[0]);
             error = true;
+            return false;
         }
 
 

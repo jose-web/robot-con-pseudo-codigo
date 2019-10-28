@@ -13,7 +13,6 @@ function copiaArray($array) {
 
 
 function mensajeError($error) {
-    $(".alert").remove();
 
     $("body").append('<div class="fixed-top alert alert-danger fade">' +
         '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
@@ -26,4 +25,8 @@ function mensajeError($error) {
     setTimeout(function () {
         $(".alert").removeClass("show");
     }, 3000);
+
+    setTimeout(function () {
+        $(".alert").remove();
+    }, 3500);
 }

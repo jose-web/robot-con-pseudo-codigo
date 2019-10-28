@@ -41,10 +41,14 @@ body {
     color: transparent;
     caret-color: black;
     border: 0;
+    resize: none;
+    overflow: hidden;
 }
-#textoColor{
-    background-color: rgba(211, 211, 211, 0.363);
 
+#textoColor {
+    background-color: rgba(211, 211, 211, 0.363);
+    border-left: 0.01em solid black;
+    border-right: 0.01em solid black;
 }
 
 #textoColor, #texto {
@@ -55,7 +59,7 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 1rem;
     line-height: normal;
-    padding:1em;
+    padding: 1em;
 }
 
 @keyframes mueveFondo {
