@@ -6,8 +6,11 @@ function compruebaSintaxis($codigo) {
     let error = false;
 
     do {
-
         contador = 0;
+
+        if (typeof (arrayTexto[0]) == "undefined") {
+            break;
+        }
 
         //////////////////////////////////////////////////////
         ////////////////////// Variables /////////////////////
@@ -39,13 +42,15 @@ function compruebaSintaxis($codigo) {
 
                 $codigo.push(arrayTexto[0]);
                 arrayTexto.shift();
+
+                compruebaSintaxis($codigo);
             }
 
         }
 
         //////////////////////// Inicialización (separado) ////////////////////////
 
-        if (arrayTexto[1] == "=") {
+        else if (arrayTexto[1] == "=") {
 
             if (!Number.isInteger(arrayTexto[0] - 1)
                 && arrayTexto[2] != ""
@@ -72,6 +77,9 @@ function compruebaSintaxis($codigo) {
                 arrayTexto.shift();
                 arrayTexto.shift();
                 arrayTexto.shift();
+
+                compruebaSintaxis($codigo);
+
             }
 
         }
@@ -79,7 +87,7 @@ function compruebaSintaxis($codigo) {
 
         //////////////////////// Suma y resta (junto) ////////////////////////
 
-        if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
+        else if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
             let contadorvar = 0;
 
             let nombreVariable = arrayTexto[0].slice(0, arrayTexto[0].length - 2);
@@ -89,6 +97,9 @@ function compruebaSintaxis($codigo) {
                 if (nombreVariable == valor) {
                     $codigo.push(arrayTexto[0]);
                     arrayTexto.shift();
+
+                    compruebaSintaxis($codigo);
+
                 } else {
                     contadorvar++;
                 }
@@ -103,7 +114,7 @@ function compruebaSintaxis($codigo) {
         }
 
         //////////////////////// Suma y resta (separado) ////////////////////////
-        if (arrayTexto[1] == "++" || arrayTexto[1] == "--") {
+        else if (arrayTexto[1] == "++" || arrayTexto[1] == "--") {
             let contadorvar = 0;
 
             variables.forEach(valor => {
@@ -113,6 +124,8 @@ function compruebaSintaxis($codigo) {
                     $codigo.push(arrayTexto[1]);
                     arrayTexto.shift();
                     arrayTexto.shift();
+
+                    compruebaSintaxis($codigo);
 
                 } else {
                     contadorvar++;
@@ -128,7 +141,7 @@ function compruebaSintaxis($codigo) {
         }
 
         //////////////////////// Impresión ////////////////////////
-        if (arrayTexto[0] == "print") {
+        else if (arrayTexto[0] == "print") {
             let contadorvar = 0;
 
             variables.forEach(valor => {
@@ -137,6 +150,8 @@ function compruebaSintaxis($codigo) {
                     $codigo.push(arrayTexto[1]);
                     arrayTexto.shift();
                     arrayTexto.shift();
+
+                    compruebaSintaxis($codigo);
 
                 } else {
                     contadorvar++;
@@ -253,6 +268,7 @@ function compruebaSintaxis($codigo) {
         let bucleSinCerrar = contadorBucle > 0 && arrayTexto.length == 0; // Detecta si no se ha cerrado un bucle
         let endSolo = arrayTexto[0] == "end"; //Detecta si existe un end sin bucle
 
+
         // mensajeError(sentenciaMalEscrita,bucleSinCerrar,endSolo);
         if (endSolo) {
             mensajeError("Se ha encontrado un 'end' sin bucle");
@@ -265,8 +281,11 @@ function compruebaSintaxis($codigo) {
             return false;
 
         } else if (sentenciaMalEscrita) {
-            mensajeError("error de sintaxis en: " + arrayTexto[0]);
-            error = true;
+            console.log("error misterioso");
+            if (arrayTexto[0] != "print") {
+                mensajeError("error de sintaxis en: " + arrayTexto[0]);
+                error = true;
+            }
             return false;
         }
 
@@ -277,6 +296,5 @@ function compruebaSintaxis($codigo) {
         return false;
     else
         return true;
-
 
 }
