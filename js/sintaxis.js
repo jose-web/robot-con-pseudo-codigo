@@ -9,11 +9,6 @@ function compruebaSintaxis($codigo) {
 
         contador = 0;
 
-        if (typeof (arrayTexto[0]) == "undefined") {
-            break;
-        }
-
-
         //////////////////////////////////////////////////////
         ////////////////////// Variables /////////////////////
         //////////////////////////////////////////////////////
@@ -134,7 +129,6 @@ function compruebaSintaxis($codigo) {
 
         //////////////////////// Impresión ////////////////////////
         if (arrayTexto[0] == "print") {
-
             let contadorvar = 0;
 
             variables.forEach(valor => {
@@ -151,7 +145,10 @@ function compruebaSintaxis($codigo) {
             });
 
             if (contadorvar == variables.length) {
-                mensajeError("'" + arrayTexto[1] + "' no es una variable");
+                if (typeof (arrayTexto[1]) == "undefined")
+                    mensajeError("Falta la variable en el 'print'");
+                else
+                    mensajeError("'" + arrayTexto[1] + "' no es una variable");
                 error = true;
                 return false;
             }
@@ -240,6 +237,9 @@ function compruebaSintaxis($codigo) {
             contador++;
         }
 
+        if (typeof (arrayTexto[0]) == "undefined") {
+            break;
+        }
 
 
         if (contadorBucle > 0 && arrayTexto[0] == "end") {

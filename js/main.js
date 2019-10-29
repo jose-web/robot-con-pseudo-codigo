@@ -61,6 +61,9 @@ function iniciar() {
 
             while (arrayCodigo[ultimoArray()].length == 0) {
                 arrayCodigo.pop(); // Elimina el último si está vacío
+                if (typeof (arrayCodigo[ultimoArray()]) == "undefined") {
+                    return false;
+                }
             }
 
 
