@@ -38,7 +38,7 @@ function iniciar() {
 
     console.log(buenaSintaxis, codigo);
 
-    if (false) {
+    if (buenaSintaxis) {
 
         //Animación fondo
         document.getElementsByTagName("body")[0].style.animationPlayState = 'running';
