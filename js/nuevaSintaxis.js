@@ -21,13 +21,6 @@ function compruebaSintaxis($codigo) {
         let bucleSinCerrar = this.cuentaBucle > 0 && arrayTexto.length == 0; // Detecta si no se ha cerrado un bucle
         let endSolo = arrayTexto[0] == "end"; //Detecta si existe un end sin bucle
 
-
-        if (compruebaSintaxisSentencia($codigo)) {
-            mensajeError("Error con la sentencia " + arrayTexto[0]);
-            error = 1;
-            break;
-        }
-
         if (endSolo) {
             mensajeError("Se ha encontrado un 'end' sin bucle");
             error = true;
@@ -40,6 +33,12 @@ function compruebaSintaxis($codigo) {
 
         }
 
+        if (compruebaSintaxisSentencia($codigo)) {
+            mensajeError("Error con la sentencia " + arrayTexto[0]);
+            error = true;
+            break;
+        }
+
     } while (arrayTexto.length > 0 && !error);
 
     this.cuentaBucle = 0;
@@ -49,7 +48,7 @@ function compruebaSintaxis($codigo) {
 
 function compruebaSintaxisBucle($codigo) {
 
-    if (arrayTexto[0] == "while" || arrayTexto[0] == "for") {
+    while (arrayTexto[0] == "while" || arrayTexto[0] == "for") {
         this.cuentaBucle++;
         $codigo.push(new Array());
 
@@ -68,7 +67,7 @@ function compruebaSintaxisBucle($codigo) {
                     arrayTexto.shift();
 
                     compruebaSintaxis($codigo[numBucle]);
-                    return false;
+                   break;
                 }
                 contadorCondicion++;
             }
@@ -84,13 +83,14 @@ function compruebaSintaxisBucle($codigo) {
                 arrayTexto.shift();
 
                 compruebaSintaxis($codigo[numBucle]);
-                return false;
+                break;
 
             } else {
                 return true;
             }
         }
     }
+    return false;
 }
 
 function compruebaSintaxisSentencia($codigo) {
@@ -104,9 +104,7 @@ function compruebaSintaxisSentencia($codigo) {
             $codigo.push(sentencia[i]);
             return false;
         }
-
         contador++;
-
     }
 
     if (contador == sentencia.length && arrayTexto.length > 0) {
