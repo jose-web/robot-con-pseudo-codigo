@@ -3,13 +3,8 @@ function compruebaSintaxis($codigo) {
     this.cuentaEnd = typeof (cuentaEnd) == "undefined" ? 0 : cuentaEnd;
 
     do {
-        if (compruebaSintaxisBucle($codigo)) {
-            error = true;
-            mensajeError("falta condicion en el " + arrayTexto[0]);
-            break;
-        }
-
-        let compruebaTipoErrorIf = compruebaSintaxisIf($codigo);
+      
+        let compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo);
         if (compruebaTipoErrorIf != 0) {
             if (compruebaTipoErrorIf == 1)
                 mensajeError("falta condicion en el " + arrayTexto[0]);
@@ -31,12 +26,6 @@ function compruebaSintaxis($codigo) {
         let bucleSinCerrar = this.cuentaEnd > 0 && arrayTexto.length == 0; // Detecta si no se ha cerrado un bucle
         let endSolo = arrayTexto[0] == "end"; //Detecta si existe un end sin bucle
 
-        if (compruebaSintaxisSentencia($codigo)) {
-            mensajeError("Error con la sentencia " + arrayTexto[0]);
-            error = true;
-            break;
-        }
-
         if (endSolo) {
             mensajeError("Se ha encontrado un 'end' sin bucle");
             error = true;
@@ -48,6 +37,14 @@ function compruebaSintaxis($codigo) {
             break;
 
         }
+
+        if (compruebaSintaxisSentencia($codigo)) {
+            mensajeError("Error con la sentencia " + arrayTexto[0]);
+            error = true;
+            break;
+        }
+
+
     } while (arrayTexto.length > 0 && !error);
 
     this.cuentaEnd = 0;
@@ -55,9 +52,9 @@ function compruebaSintaxis($codigo) {
     return !error;
 }
 
-function compruebaSintaxisBucle($codigo) {
+function compruebaSintaxisBucleIF($codigo) {
 
-    while (arrayTexto[0] == "while" || arrayTexto[0] == "for") {
+    while (arrayTexto[0] == "while" || arrayTexto[0] == "for" || arrayTexto[0] == "if") {
         this.cuentaEnd++;
         $codigo.push(new Array());
 
@@ -82,7 +79,7 @@ function compruebaSintaxisBucle($codigo) {
             }
 
             if (contadorCondicion == condicion.length) {
-                return true;
+                return 1;
             }
 
         } else if (arrayTexto[0] == "for") {
@@ -95,48 +92,38 @@ function compruebaSintaxisBucle($codigo) {
                 break;
 
             } else {
-                return true;
+                return 1;
             }
-        }
-    }
-    return false;
-}
-
-function compruebaSintaxisIf($codigo) {
-    while (arrayTexto[0] == "if") {
-        this.cuentaEnd++;
-
-        $codigo.push(new Array());
-
-        let numBucle = $codigo.length - 1;
-
-        let condicion = ["nb", "mine", "block", "nw"];
-        let contadorCondicion = 0;
-
-        for (let o = 0; o < condicion.length; o++) {
-            if (condicion[o] == arrayTexto[1]) {
-
-                if (arrayTexto[2] == "then") {
-                    $codigo[numBucle].push(1);
-                    $codigo[numBucle].push(arrayTexto[1]);
-                    arrayTexto.shift();
-                    arrayTexto.shift();
-                    arrayTexto.shift();
-
-                    compruebaSintaxis($codigo[numBucle]);
-                    break;
-                } else {
-                    return 2;
+        }else if (arrayTexto[0] == "if") {
+            
+            let condicion = ["nb", "mine", "block", "nw"];
+            let contadorCondicion = 0;
+    
+            for (let o = 0; o < condicion.length; o++) {
+                if (condicion[o] == arrayTexto[1]) {
+    
+                    if (arrayTexto[2] == "then") {
+                        $codigo[numBucle].push(1);
+                        $codigo[numBucle].push(arrayTexto[1]);
+                        arrayTexto.shift();
+                        arrayTexto.shift();
+                        arrayTexto.shift();
+    
+                        compruebaSintaxis($codigo[numBucle]);
+                        break;
+                    } else {
+                        return 2;
+                    }
+    
                 }
-
+                contadorCondicion++;
             }
-            contadorCondicion++;
+    
+            if (contadorCondicion == condicion.length) {
+                return 1;
+            }
+    
         }
-
-        if (contadorCondicion == condicion.length) {
-            return 1;
-        }
-
     }
     return 0;
 }
