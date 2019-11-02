@@ -1,13 +1,9 @@
 document.write('<scr' + 'ipt type="text/javascript" src="js/variablesGlobales.js" ></scr' + 'ipt>');
 document.write('<scr' + 'ipt type="text/javascript" src="js/auxiliar.js" ></scr' + 'ipt>');
 document.write('<scr' + 'ipt type="text/javascript" src="js/tablero.js" ></scr' + 'ipt>');
-// document.write('<scr' + 'ipt type="text/javascript" src="js/sintaxis.js" ></scr' + 'ipt>');
-document.write('<scr' + 'ipt type="text/javascript" src="js/nuevaSintaxis.js" ></scr' + 'ipt>');
+document.write('<scr' + 'ipt type="text/javascript" src="js/sintaxis.js" ></scr' + 'ipt>');
+//document.write('<scr' + 'ipt type="text/javascript" src="js/nuevaSintaxis.js" ></scr' + 'ipt>');
 document.write('<scr' + 'ipt type="text/javascript" src="js/movimiento.js" ></scr' + 'ipt>');
-
-
-
-
 
 /*-----------------------------------------------
 Iniciar
@@ -17,7 +13,6 @@ function iniciar() {
     robot.spawn();
     clearInterval(reloj.intervalo);
     codigo = new Array();
-    variables = new Array();
 
     textoMinuscula = document.getElementById("texto").value.toLowerCase();
 
@@ -38,7 +33,7 @@ function iniciar() {
 
     console.log(buenaSintaxis, codigo);
 
-    if (buenaSintaxis) {
+    if (false) {
 
         //Animación fondo
         document.getElementsByTagName("body")[0].style.animationPlayState = 'running';
