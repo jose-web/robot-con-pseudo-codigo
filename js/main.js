@@ -48,7 +48,9 @@ function iniciar() {
         guardaBucle = "";
 
         reloj.intervalo = setInterval(function () {
+            let repetir = false;
 
+            do {
 
             if (arrayCodigo.length == 0) {
                 document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
@@ -63,13 +65,19 @@ function iniciar() {
                     return false;
                 }
             }
+            
+            console.log(arrayCodigo[ultimoArray()][0]);
 
+                compruebaBucleIf();
 
-            compruebaBucle();
+                if (!compruebaSentencias()) {
+                    repetir = true;
+                }else{
+                    repetir = false;
+                }
 
-            compruebaVariables();
+            } while (repetir);
 
-            compruebaSentencias();
 
         }, reloj.velocidad);
     }

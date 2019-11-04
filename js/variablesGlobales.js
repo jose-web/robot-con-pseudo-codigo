@@ -18,11 +18,13 @@ var robot = {
 
     // --------------------------------------------------------
 
-    pintar: function($icono) {
-        let tabla = document.getElementById("tabla");
-        let filas = tabla.getElementsByClassName('fila-casilla');
-        let casillas = filas[this.y + 1].getElementsByClassName('casilla');
-        casillas[this.x].innerHTML = $icono;
+    pintar: function ($icono) {
+        if (this.y + 1 != 12) {
+            let tabla = document.getElementById("tabla");
+            let filas = tabla.getElementsByClassName('fila-casilla');
+            let casillas = filas[this.y + 1].getElementsByClassName('casilla');
+            casillas[this.x].innerHTML = $icono;
+        }
     },
 
     // --------------------------------------------------------
@@ -37,12 +39,11 @@ var robot = {
         ) // Derecha
         ) {
 
-            if (this.y != 11) tableroVirtual[this.y][this.x] = "";
-
-            if (this.y + 1 != 12 && !estela) {
+            if (this.y + 1 != 12 && this.compruebaMina()) {
+                this.pintar("📍");
+            } else if (!estela) {
                 this.pintar("");
             }
-
 
             let icono = "";
 
@@ -70,7 +71,6 @@ var robot = {
             this.pintar(icono);
 
         } else if (this.x == 1 && this.y == 0 && this.direccion == 0) {
-            tableroVirtual[this.y][this.x] = "";
             clearInterval(reloj.intervalo);
             document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
 
@@ -127,16 +127,16 @@ var robot = {
     compruebaBloque: function () {
         switch (this.direccion) {
             case 0: //Arriba
-                return this.y != 0 && tableroVirtual[this.y - 1][this.x] == "";
+                return this.y != 0 && (tableroVirtual[this.y - 1][this.x] == "" || tableroVirtual[this.y - 1][this.x] == "📍");
 
             case 1: //Izquierda
-                return this.x != 0 && tableroVirtual[this.y][this.x - 1] == "";
+                return this.x != 0 && (tableroVirtual[this.y][this.x - 1] == "" || tableroVirtual[this.y][this.x - 1] == "📍");
 
             case 2: //Abajo
-                return this.y != 10 && tableroVirtual[this.y + 1][this.x] == "";
+                return this.y != 10 && (tableroVirtual[this.y + 1][this.x] == "" || tableroVirtual[this.y + 1][this.x] == "📍");
 
             case 3: //Derecha
-                return this.x != 14 && tableroVirtual[this.y][this.x + 1] == "";
+                return this.x != 14 && (tableroVirtual[this.y][this.x + 1] == "" || tableroVirtual[this.y][this.x + 1] == "📍");
 
         }
 
@@ -148,16 +148,16 @@ var robot = {
     compruebaMina: function () {
         switch (this.direccion) {
             case 0: //Arriba
-                return this.y != 0 && tableroVirtual[this.y - 1][this.x] == "📍";
+                return this.y != -1 && tableroVirtual[this.y][this.x] == "📍";
 
             case 1: //Izquierda
-                return this.x != 0 && tableroVirtual[this.y][this.x - 1] == "📍";
+                return this.x != -1 && tableroVirtual[this.y][this.x] == "📍";
 
             case 2: //Abajo
-                return this.y != 10 && tableroVirtual[this.y + 1][this.x] == "📍";
+                return this.y != 10 && tableroVirtual[this.y][this.x] == "📍";
 
             case 3: //Derecha
-                return this.x != 14 && tableroVirtual[this.y][this.x + 1] == "📍";
+                return this.x != 14 && tableroVirtual[this.y][this.x] == "📍";
 
         }
     },
@@ -166,22 +166,23 @@ var robot = {
 
 
     desactivaMina: function () {
+        console.log(this.y,this.x,tableroVirtual[this.y][this.x]);
         if (this.compruebaMina()) {
             switch (this.direccion) {
                 case 0: //Arriba
-                    if (this.y != 0) tableroVirtual[this.y - 1][this.x] = "";
+                    if (this.y != -1) tableroVirtual[this.y][this.x] = "";
                     break;
 
                 case 1: //Izquierda
-                    if (this.x != 0) tableroVirtual[this.y][this.x - 1] = "";
+                    if (this.x != -1) tableroVirtual[this.y][this.x] = "";
                     break;
 
                 case 2: //Abajo
-                    if (this.y != 10) tableroVirtual[this.y + 1][this.x] = "";
+                    if (this.y != 10) tableroVirtual[this.y][this.x] = "";
                     break;
 
                 case 3: //Derecha
-                    if (this.x != 14) tableroVirtual[this.y][this.x + 1] = "";
+                    if (this.x != 14) tableroVirtual[this.y][this.x] = "";
                     break;
 
             }

@@ -12,19 +12,6 @@ function compruebaSintaxis($codigo) {
 
 
     do {
-        /*
-        if ((compruebaVariable = compruebaSintaxisVariable($codigo)) && compruebaVariable != "") {
-            if (compruebaVariable.indexOf("++") > 0 || compruebaVariable.indexOf("--") > 0) {
-                let nombreVariable = compruebaVariable.slice(0, compruebaVariable.length - 2);
-                mensajeError("'" + nombreVariable + "' no es una variable declarada");
-            } else
-                mensajeError("'" + compruebaVariable + "' no puede ser una variable");
-
-            error = true;
-            break;
-
-        } else 
-        */
         if ((compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo)) && compruebaTipoErrorIf != 0) {
             if (compruebaTipoErrorIf == 1) {
                 mensajeError("falta condicion en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea() + 1));
@@ -72,93 +59,7 @@ function compruebaSintaxis($codigo) {
     return !error;
 
 }
-/*
-function compruebaSintaxisVariable($codigo) {
-    if (typeof (arrayTexto[0]) != "undefined") {
 
-        ////////////////// DECLARACIÓN VARIABLE (JUNTO) //////////////////
-        if (arrayTexto[0].indexOf("=") > 0
-            || arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0
-            || arrayTexto[0] == "print") {
-
-            if (arrayTexto[0].indexOf("=") > 0) {
-                let declaracion = arrayTexto[0].split("=");
-
-                if (declaracion.length == 2
-                    && !Number.isInteger(declaracion[0] - 1)
-                    && declaracion[1] != ""
-                    && Number.isInteger(declaracion[1] - 1)) {
-
-
-                    //Comprueba que no sea una palabra clave
-                    let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice());
-                    for (let i = 0; i < compruebaTodo.length; i++) {
-                        for (let o = 0; o < compruebaTodo[i].length; o++) {
-                            if (declaracion[0] == compruebaTodo[i][o]) {
-                                return declaracion[0];
-                            }
-                        }
-                    }
-
-                    variables.push(declaracion[0]);
-
-                    $codigo.push(arrayTexto[0]);
-                    arrayTexto.shift();
-
-                }
-            } else if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
-                let nombreVariable = arrayTexto[0].slice(0, arrayTexto[0].length - 2);
-
-                let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice());
-                for (let i = 0; i < compruebaTodo.length; i++) {
-                    for (let o = 0; o < compruebaTodo[i].length; o++) {
-                        if (nombreVariable == compruebaTodo[i][o]) {
-                            return nombreVariable;
-                        }
-                    }
-                }
-
-                let contadorVariables = 0;
-                for (let i = 0; i < variables.length; i++) {
-                    if (variables[i].indexOf(nombreVariable) == 0) {
-                        $codigo.push(arrayTexto[0]);
-                        arrayTexto.shift();
-                        break
-                    } else {
-                        contadorVariables++;
-                    }
-                }
-                if (contadorVariables == variables.length) {
-                    console.log("sdsff");
-                    return arrayTexto[0];
-                }
-            } else if (arrayTexto[0] == "print") {
-
-                let contadorVariables = 0;
-
-                for (let i = 0; i < variables.length; i++) {
-
-                    if (arrayTexto[1] == variables[i]) {
-
-                        $codigo.push(arrayTexto[0]);
-                        $codigo.push(arrayTexto[1]);
-                        arrayTexto.shift();
-                        arrayTexto.shift();
-                        break;
-                    } else {
-                        contadorVariables++;
-                    }
-                }
-
-                if (contadorVariables == variables.length) {
-                    return arrayTexto[1] + "++";
-                }
-            }
-            return "";
-        }
-    }
-}
-*/
 function compruebaSintaxisBucleIF($codigo) {
     if (arrayTexto[0] == "while" || arrayTexto[0] == "for" || arrayTexto[0] == "if") {
         cuentaEnd++;
