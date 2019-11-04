@@ -18,6 +18,15 @@ var robot = {
 
     // --------------------------------------------------------
 
+    pintar: function($icono) {
+        let tabla = document.getElementById("tabla");
+        let filas = tabla.getElementsByClassName('fila-casilla');
+        let casillas = filas[this.y + 1].getElementsByClassName('casilla');
+        casillas[this.x].innerHTML = $icono;
+    },
+
+    // --------------------------------------------------------
+
     avanza: function () {
 
         if (this.compruebaBloque() && (
@@ -29,6 +38,11 @@ var robot = {
         ) {
 
             if (this.y != 11) tableroVirtual[this.y][this.x] = "";
+
+            if (this.y + 1 != 12 && !estela) {
+                this.pintar("");
+            }
+
 
             let icono = "";
 
@@ -53,7 +67,7 @@ var robot = {
                     icono += "→";
             }
 
-            tableroVirtual[this.y][this.x] = icono;
+            this.pintar(icono);
 
         } else if (this.x == 1 && this.y == 0 && this.direccion == 0) {
             tableroVirtual[this.y][this.x] = "";
@@ -84,7 +98,7 @@ var robot = {
         } else {
 
             console.log("choque");
-            tableroVirtual[this.y][this.x] = "💥";
+            this.pintar("💥");
             clearInterval(reloj.intervalo);
             document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
 
@@ -97,7 +111,6 @@ var robot = {
     giraIzquierda: function () {
         this.direccion++;
         iconoFlecha();
-        pintarTablero();
     },
 
     // --------------------------------------------------------
@@ -106,7 +119,6 @@ var robot = {
     giraDerecha: function () {
         this.direccion--;
         iconoFlecha();
-        pintarTablero();
     },
 
     // --------------------------------------------------------
@@ -226,3 +238,5 @@ var ultimoArray = () => arrayCodigo.length - 1 == -1 ? 0 : arrayCodigo.length - 
 var nivel = 1;
 
 var variables = new Array();
+
+var estela = false;

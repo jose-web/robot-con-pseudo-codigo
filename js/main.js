@@ -3,7 +3,9 @@ document.write('<scr' + 'ipt type="text/javascript" src="js/auxiliar.js" ></scr'
 document.write('<scr' + 'ipt type="text/javascript" src="js/tablero.js" ></scr' + 'ipt>');
 document.write('<scr' + 'ipt type="text/javascript" src="js/sintaxis.js" ></scr' + 'ipt>');
 //document.write('<scr' + 'ipt type="text/javascript" src="js/nuevaSintaxis.js" ></scr' + 'ipt>');
-document.write('<scr' + 'ipt type="text/javascript" src="js/movimiento.js" ></scr' + 'ipt>');
+//document.write('<scr' + 'ipt type="text/javascript" src="js/movimiento.js" ></scr' + 'ipt>');
+document.write('<scr' + 'ipt type="text/javascript" src="js/nuevoMovimiento.js" ></scr' + 'ipt>');
+
 
 /*-----------------------------------------------
 Iniciar
@@ -33,7 +35,7 @@ function iniciar() {
 
     console.log(buenaSintaxis, codigo);
 
-    if (false) {
+    if (buenaSintaxis) {
 
         //Animación fondo
         document.getElementsByTagName("body")[0].style.animationPlayState = 'running';
@@ -68,11 +70,6 @@ function iniciar() {
             compruebaVariables();
 
             compruebaSentencias();
-
-
-            //  console.log(arrayCodigo.toString());
-
-            pintarTablero();
 
         }, reloj.velocidad);
     }

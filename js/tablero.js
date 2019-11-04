@@ -281,7 +281,7 @@ function iconoFlecha() {
             icono += "→";
     }
 
-    tableroVirtual[robot.y][robot.x] = icono;
+    robot.pintar(icono);
 }
 
 
