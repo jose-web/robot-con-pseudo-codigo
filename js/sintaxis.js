@@ -27,11 +27,11 @@ function compruebaSintaxis($codigo) {
         */
         if ((compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo)) && compruebaTipoErrorIf != 0) {
             if (compruebaTipoErrorIf == 1) {
-                mensajeError("falta condicion en el " + arrayTexto[0] + " en la línea " + (adivinaLinea() + 1));
+                mensajeError("falta condicion en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea() + 1));
                 error = true;
                 break;
             } else if (compruebaTipoErrorIf == 2) {
-                mensajeError("falta el 'then' en el " + arrayTexto[0] + " en la línea " + (adivinaLinea() + 1));
+                mensajeError("falta el 'then' en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea() + 1));
                 error = true;
                 break;
             }
@@ -59,7 +59,7 @@ function compruebaSintaxis($codigo) {
             break;
 
         } else if (contadorExistenciaSentencia == 2 && arrayTexto.length > 0) {
-            mensajeError("Error con la sentencia " + arrayTexto[0] + " en la línea " + adivinaLinea());
+            mensajeError("Error con la sentencia '" + arrayTexto[0] + "' en la línea " + adivinaLinea());
             error = true;
             break;
 
@@ -245,7 +245,7 @@ function adivinaLinea() {
             textoOriginal[i] = textoOriginal[i].replace(" ", "")
         }
     }
-    while (arrayTexto.length > 0) {
+    while (arrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
         textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(textoOriginal[textoOriginal.length - 1].indexOf(arrayTexto[arrayTexto.length - 1]), arrayTexto[arrayTexto.length - 1]);
 
         if (arrayTexto.length > 0) {
