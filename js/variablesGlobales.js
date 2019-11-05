@@ -88,6 +88,7 @@ var robot = {
             if (contadorMinasFinal > 0) {
                 mensajeError("Faltan " + contadorMinasFinal + " minas por desactivar");
             } else {
+                this.pintar("");
                 confetti.start();
 
                 setTimeout(function () {
@@ -166,8 +167,11 @@ var robot = {
 
 
     desactivaMina: function () {
-        console.log(this.y,this.x,tableroVirtual[this.y][this.x]);
         if (this.compruebaMina()) {
+            let contadorMinas = document.getElementById('contadorMinas');
+            let numeroContadorMinas = contadorMinas.getElementsByTagName('span')[0];
+            numeroContadorMinas.innerHTML--;
+
             switch (this.direccion) {
                 case 0: //Arriba
                     if (this.y != -1) tableroVirtual[this.y][this.x] = "";
@@ -184,7 +188,6 @@ var robot = {
                 case 3: //Derecha
                     if (this.x != 14) tableroVirtual[this.y][this.x] = "";
                     break;
-
             }
         }
     },
@@ -240,4 +243,4 @@ var nivel = 1;
 
 var variables = new Array();
 
-var estela = false;
+var estela = document.getElementById('estela').checked;

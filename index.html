@@ -26,6 +26,15 @@
             </div>
             <button id="siguienteNivel" class="col btn btn-primary ">Siguiente nivel</button>
 
+             <!--CONTADOR MINAS-->
+             <div id="contadorMinas" class="alert alert-danger m-0 d-none alineaVerticalmente">
+                Faltan<span>0</span>minas</div>
+
+            <!--ESTELA-->
+            <label for="estela" class="btn btn-success m-0 alineaVerticalmente">Estela <input type="checkbox" id="estela" class="badgebox">
+                <span class="badge">&check;</span></label>
+
+
             <!--TABLA-->
             <div class="p-2 col-12 col-md-9 m-0 bg-light row align-items-center justify-content-center">
                 <div id="tabla"></div>
@@ -42,7 +51,6 @@
         </div>
 
     </div>
-
 
     <!--AYUDA-->
     <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
@@ -102,7 +110,6 @@
                         <p>IF: Estructura: if (condición) then (sentencias) end</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

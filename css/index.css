@@ -70,3 +70,32 @@ body {
         background-position: 100% 0%;
     }
 }
+
+/* Hiding the checkbox, but allowing it to be focused */
+
+.badgebox {
+    opacity: 0;
+}
+
+.badgebox+.badge {
+    /* Move the check mark away when unchecked */
+    text-indent: -999999px;
+    /* Makes the badge's width stay the same checked and unchecked */
+    width: 3em;
+    background-color: white;
+    color: green;
+}
+
+.badgebox:checked+.badge {
+    /* Move the check mark back when checked */
+    text-indent: 0;
+}
+
+.alineaVerticalmente{
+    display: flex;
+    align-items: center;
+}
+
+#contadorMinas span{
+    margin: auto 0.3em auto 0.3em;
+}

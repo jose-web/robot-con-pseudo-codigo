@@ -15,6 +15,7 @@ function iniciar() {
     robot.spawn();
     clearInterval(reloj.intervalo);
     codigo = new Array();
+    estela = document.getElementById('estela').checked;
 
     textoMinuscula = document.getElementById("texto").value.toLowerCase();
 
@@ -40,10 +41,7 @@ function iniciar() {
         //Animación fondo
         document.getElementsByTagName("body")[0].style.animationPlayState = 'running';
 
-
-
         arrayCodigo = new Array(codigo.slice());
-
 
         guardaBucle = "";
 
@@ -52,32 +50,29 @@ function iniciar() {
 
             do {
 
-            if (arrayCodigo.length == 0) {
-                document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
-                clearInterval(reloj.intervalo);
-                console.log("//FIN//");
-                return true;
-            }
-
-            while (arrayCodigo[ultimoArray()].length == 0) {
-                arrayCodigo.pop(); // Elimina el último si está vacío
-                if (typeof (arrayCodigo[ultimoArray()]) == "undefined") {
-                    return false;
+                if (arrayCodigo.length == 0) {
+                    document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
+                    clearInterval(reloj.intervalo);
+                    console.log("//FIN//");
+                    return true;
                 }
-            }
-            
-            console.log(arrayCodigo[ultimoArray()][0]);
+
+                while (arrayCodigo[ultimoArray()].length == 0) {
+                    arrayCodigo.pop(); // Elimina el último si está vacío
+                    if (typeof (arrayCodigo[ultimoArray()]) == "undefined") {
+                        return false;
+                    }
+                }
 
                 compruebaBucleIf();
 
                 if (!compruebaSentencias()) {
                     repetir = true;
-                }else{
+                } else {
                     repetir = false;
                 }
 
             } while (repetir);
-
 
         }, reloj.velocidad);
     }
@@ -124,8 +119,6 @@ window.onload = function () {
         nivelTablero();
     };
 
-
-
     document.getElementById("texto").onkeyup = function () {
         let textoSinColor = this.value.toString();
         let nuevoTextoColor = textoSinColor;
@@ -136,8 +129,5 @@ window.onload = function () {
         nuevoTextoColor = nuevoTextoColor.replace(/a|tl|tr|deact/gi, "<textoColor style='color:green'><b>$&</b></textoColor>");
 
         document.getElementById("textoColor").innerHTML = nuevoTextoColor;
-
     };
-
 };
-

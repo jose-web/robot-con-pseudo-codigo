@@ -1,4 +1,7 @@
 function nivelTablero() {
+    let contadorMinas = document.getElementById('contadorMinas');
+    let numeroContadorMinas = contadorMinas.getElementsByTagName('span')[0];
+
     switch (nivel) {
         case 1:
             tableroOriginal = [
@@ -78,6 +81,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "🏠", "", "", "🏠"],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "🏠", "", ""],
             ];
+            contadorMinas.classList.add('d-none');
             break;
 
         case 6:
@@ -94,6 +98,8 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 23;
+            contadorMinas.classList.remove('d-none');
             break;
 
         case 7:
@@ -110,6 +116,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 24;
             break;
 
         case 8:
@@ -126,6 +133,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 12;
             break;
 
         case 9:
@@ -142,6 +150,8 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "📍", "", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 11;
+
             break;
         case 10:
             tableroOriginal = [
@@ -157,6 +167,8 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 22;
+
             break;
         case 11:
             tableroOriginal = [
@@ -172,6 +184,8 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 23;
+
             break;
 
         case 12:
@@ -188,6 +202,8 @@ function nivelTablero() {
                 ["", "📍", "", "📍", "", "📍", "", "📍", "", "📍", "", "📍", "", "📍", ""],
                 ["", "📍", "", "📍", "", "📍", "", "📍", "", "📍", "", "📍", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 77;
+
             break;
 
         case 13:
@@ -204,6 +220,8 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 ["", "📍", "", "📍", "", "📍", "", "📍", "", "📍", "", "📍", "", "📍", ""],
             ];
+            numeroContadorMinas.innerHTML = 42;
+
             break;
 
 

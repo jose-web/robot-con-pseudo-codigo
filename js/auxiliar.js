@@ -14,19 +14,19 @@ function copiaArray($array) {
 
 function mensajeError($error) {
 
-    $("body").append('<div class="fixed-top alert alert-danger fade">' +
+    $("body").append('<div id="alertaError" class="fixed-top alert alert-danger fade">' +
         '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
         '<strong>¡Cuidado! </strong>' + $error + '</div>');
 
     setTimeout(function () {
-        $(".alert").addClass("show");
+        $("#alertaError").addClass("show");
     }, 1);
 
     setTimeout(function () {
-        $(".alert").removeClass("show");
+        $("#alertaError").removeClass("show");
     }, 3000);
 
     setTimeout(function () {
-        $(".alert").remove();
+        $("#alertaError").remove();
     }, 3500);
 }
