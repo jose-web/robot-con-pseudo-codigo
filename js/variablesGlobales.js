@@ -88,8 +88,8 @@ var robot = {
             if (contadorMinasFinal > 0) {
                 mensajeError("Faltan " + contadorMinasFinal + " minas por desactivar");
             } else {
-                if(!estela)
-                this.pintar("");
+                if (!estela)
+                    this.pintar("");
                 confetti.start();
 
                 setTimeout(function () {
@@ -111,16 +111,20 @@ var robot = {
 
 
     giraIzquierda: function () {
-        this.direccion++;
-        iconoFlecha();
+        if (this.y != 11) {
+            this.direccion++;
+            iconoFlecha();
+        }
     },
 
     // --------------------------------------------------------
 
 
     giraDerecha: function () {
-        this.direccion--;
-        iconoFlecha();
+        if (this.y != 11) {
+            this.direccion--;
+            iconoFlecha();
+        }
     },
 
     // --------------------------------------------------------
@@ -148,20 +152,21 @@ var robot = {
 
 
     compruebaMina: function () {
-        switch (this.direccion) {
-            case 0: //Arriba
-                return this.y != -1 && tableroVirtual[this.y][this.x] == "📍";
+        if (this.y != 11)
+            switch (this.direccion) {
+                case 0: //Arriba
+                    return this.y != -1 && tableroVirtual[this.y][this.x] == "📍";
 
-            case 1: //Izquierda
-                return this.x != -1 && tableroVirtual[this.y][this.x] == "📍";
+                case 1: //Izquierda
+                    return this.x != -1 && tableroVirtual[this.y][this.x] == "📍";
 
-            case 2: //Abajo
-                return this.y != 10 && tableroVirtual[this.y][this.x] == "📍";
+                case 2: //Abajo
+                    return this.y != 10 && tableroVirtual[this.y][this.x] == "📍";
 
-            case 3: //Derecha
-                return this.x != 14 && tableroVirtual[this.y][this.x] == "📍";
+                case 3: //Derecha
+                    return this.x != 14 && tableroVirtual[this.y][this.x] == "📍";
 
-        }
+            }
     },
 
     // --------------------------------------------------------
