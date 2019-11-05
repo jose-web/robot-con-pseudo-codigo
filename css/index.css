@@ -35,6 +35,12 @@ body {
     animation-play-state: paused;
 }
 
+#cajaDeCodigo{
+    overflow: hidden;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    background-color: lightgray;
+}
+
 #texto {
     position: absolute;
     background-color: transparent;
@@ -47,12 +53,10 @@ body {
 
 #textoColor {
     background-color: rgba(211, 211, 211, 0.363);
-    border-left: 0.01em solid black;
-    border-right: 0.01em solid black;
 }
 
 #textoColor, #texto {
-    width: 100%;
+    width: 1000%;
     height: 100%;
     vertical-align: middle;
     line-height: normal;
@@ -71,23 +75,18 @@ body {
     }
 }
 
-/* Hiding the checkbox, but allowing it to be focused */
-
 .badgebox {
     opacity: 0;
 }
 
 .badgebox+.badge {
-    /* Move the check mark away when unchecked */
     text-indent: -999999px;
-    /* Makes the badge's width stay the same checked and unchecked */
     width: 3em;
     background-color: white;
     color: green;
 }
 
 .badgebox:checked+.badge {
-    /* Move the check mark back when checked */
     text-indent: 0;
 }
 

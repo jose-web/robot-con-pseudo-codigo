@@ -88,6 +88,7 @@ var robot = {
             if (contadorMinasFinal > 0) {
                 mensajeError("Faltan " + contadorMinasFinal + " minas por desactivar");
             } else {
+                if(!estela)
                 this.pintar("");
                 confetti.start();
 
