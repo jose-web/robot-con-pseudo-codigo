@@ -8,8 +8,6 @@ function compruebaSintaxis($codigo) {
     this.contadorExistenciaSentencia = $codigo.length == 0 ? 0 : contadorExistenciaSentencia;
 
     let compruebaTipoErrorIf;
-    let compruebaVariable;
-
 
     do {
         if ((compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo)) && compruebaTipoErrorIf != 0) {
@@ -137,7 +135,7 @@ function compruebaSintaxisSentencia($codigo) {
 function adivinaLinea() {
     let textoOriginal = document.getElementById("texto").value.toLowerCase();
     let inicioPalabra;
-    
+
     textoOriginal = textoOriginal.split("\n");
 
     for (let i = 0; i < textoOriginal.length; i++) {
@@ -162,5 +160,5 @@ function adivinaLinea() {
             textoOriginal.pop();
         }
     }
-    return inicioPalabra!=0?textoOriginal.length-1:textoOriginal.length;
+    return inicioPalabra != 0 ? textoOriginal.length - 1 : textoOriginal.length;
 }

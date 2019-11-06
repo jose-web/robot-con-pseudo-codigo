@@ -304,35 +304,3 @@ function iconoFlecha() {
 
     robot.pintar(icono);
 }
-
-
-
-/*-----------------------------------------------
-OBSTÁCULOS ALEATORIOS
------------------------------------------------*/
-
-/*
-function obstaculo() {
-    let obstaculo = ["🌲", "🗿", "⛲", "🏰", "🏠"];
-    let aleatorio = Math.trunc(Math.trunc(Math.random() * obstaculo.length));
-    let x, y;
-
-    do {
-        x = Math.trunc(Math.trunc(Math.random() * 11));
-        y = Math.trunc(Math.trunc(Math.random() * 15));
-    } while ((x == 10 && y == 13) || (x == 0 && y == 1));
-
-    tableroOriginal[x][y] = obstaculo[aleatorio];
-}
-
-function mina() {
-    let x, y;
-
-    do {
-        x = Math.trunc(Math.trunc(Math.random() * 11));
-        y = Math.trunc(Math.trunc(Math.random() * 15));
-    } while ((x == 10 && y == 13) || (x == 0 && y == 1));
-
-    tableroOriginal[x][y] = "📍";
-}
-*/

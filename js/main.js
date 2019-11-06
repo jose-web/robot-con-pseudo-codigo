@@ -2,9 +2,7 @@ document.write('<scr' + 'ipt type="text/javascript" src="js/variablesGlobales.js
 document.write('<scr' + 'ipt type="text/javascript" src="js/auxiliar.js" ></scr' + 'ipt>');
 document.write('<scr' + 'ipt type="text/javascript" src="js/tablero.js" ></scr' + 'ipt>');
 document.write('<scr' + 'ipt type="text/javascript" src="js/sintaxis.js" ></scr' + 'ipt>');
-//document.write('<scr' + 'ipt type="text/javascript" src="js/nuevaSintaxis.js" ></scr' + 'ipt>');
-//document.write('<scr' + 'ipt type="text/javascript" src="js/movimiento.js" ></scr' + 'ipt>');
-document.write('<scr' + 'ipt type="text/javascript" src="js/nuevoMovimiento.js" ></scr' + 'ipt>');
+document.write('<scr' + 'ipt type="text/javascript" src="js/movimiento.js" ></scr' + 'ipt>');
 
 
 /*-----------------------------------------------
@@ -37,8 +35,6 @@ function iniciar() {
     }
 
     let buenaSintaxis = compruebaSintaxis(codigo);
-
-    console.log(buenaSintaxis, codigo);
 
     if (buenaSintaxis) {
 
@@ -93,19 +89,6 @@ window.onload = function () {
     document.getElementById("btniniciar").onclick = function () {
         iniciar();
     };
-
-    /*
-      let seleccionNivel = document.getElementsByClassName('nivel');
-      for (let i = 0; i < seleccionNivel.length; i++) {
-          let seleccionNivelFinal = seleccionNivel[i];
-          seleccionNivelFinal.onclick = function () {
-              let numNivel = this.id.substring(5, this.id.length) - 1 + 1;
-              nivel = numNivel;
-              nivelTablero();
-          }
-      }
-  
-    */
 
     document.getElementById('siguienteNivel').onclick = function () {
         nivel = nivel == 13 ? nivel : nivel + 1;

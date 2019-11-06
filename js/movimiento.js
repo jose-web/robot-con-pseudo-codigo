@@ -2,7 +2,7 @@
 ---------------------- BUCLE ---------------------
 ------------------------------------------------*/
 
-function compruebaBucle() {
+function compruebaBucleIf() {
     if (Array.isArray(arrayCodigo[ultimoArray()][0])) {
         let numero = arrayCodigo[ultimoArray()][0][0] - 1;
 
@@ -31,7 +31,7 @@ function compruebaBucle() {
                 arrayCodigo[ultimoArray()].shift();
 
                 arrayCodigo.push(copiaArray(copia));
-                compruebaBucle();
+                compruebaBucleIf();
 
             } else if (segundoParametro != "nb"
                 && segundoParametro != "mine"
@@ -46,86 +46,45 @@ function compruebaBucle() {
                     arrayCodigo.push(copiaArray(copia));
                     numero--;
                 }
-                compruebaBucle();
-
+                compruebaBucleIf();
             }
 
         } else if (esNb || esMine || esBlock || esMuro) { // WHILE
             let copia = arrayCodigo[ultimoArray()][0].slice();
             arrayCodigo.push(copiaArray(copia));
             arrayCodigo[ultimoArray()].shift(); //Borra condición
-            compruebaBucle();
+            compruebaBucleIf();
         }
-
+        return false;
     }
 
 }
-
-
-/*------------------------------------------------
--------------------- VARIABLES -------------------
-------------------------------------------------*/
-
-function compruebaVariables() {
-
-    if (typeof (arrayCodigo[ultimoArray()][0]) != "undefined") {
-
-        if (arrayCodigo[ultimoArray()][0].indexOf("=") > 0) {
-            let declaracion = arrayCodigo[ultimoArray()][0].split("=");
-            variables[declaracion[0]] = declaracion[1];
-
-        } else if (arrayCodigo[ultimoArray()][0].indexOf("++") > 0) {
-            let nombreVariable = arrayCodigo[ultimoArray()][0].slice(0, arrayCodigo[ultimoArray()][0].length - 2);
-            variables[nombreVariable]++;
-
-        } else if (arrayCodigo[ultimoArray()][0].indexOf("--") > 0) {
-            let nombreVariable = arrayCodigo[ultimoArray()][0].slice(0, arrayCodigo[ultimoArray()][0].length - 2);
-            variables[nombreVariable]--;
-
-        } else if (arrayCodigo[ultimoArray()][0] == "print") {
-            alert(arrayCodigo[ultimoArray()][1] + ": " + variables[arrayCodigo[ultimoArray()][1]]);
-            arrayCodigo[ultimoArray()].shift();
-
-        } else if (arrayCodigo[ultimoArray()][1] == "=") {
-            variables[arrayCodigo[ultimoArray()][0]] = arrayCodigo[ultimoArray()][2];
-            arrayCodigo[ultimoArray()].shift();
-            arrayCodigo[ultimoArray()].shift();
-
-        } else if (arrayCodigo[ultimoArray()][1] == "++") {
-            variables[arrayCodigo[ultimoArray()][0]]++;
-
-        } else if (arrayCodigo[ultimoArray()][1] == "--") {
-            variables[arrayCodigo[ultimoArray()][0]]--;
-        }
-
-    }
-}
-
 
 /*------------------------------------------------
 ------------------- SENTENCIAS -------------------
 ------------------------------------------------*/
 
 function compruebaSentencias() {
-
     switch (arrayCodigo[ultimoArray()][0]) {
         case "a":
             robot.avanza();
-            break;
+            arrayCodigo[ultimoArray()].shift();
+            return true;
 
         case "tl":
             robot.giraIzquierda();
-            break;
-
+            arrayCodigo[ultimoArray()].shift();
+            return true;
         case "tr":
             robot.giraDerecha();
-            break;
+            arrayCodigo[ultimoArray()].shift();
+            return true;
 
         case "deact":
             robot.desactivaMina();
-            break;
-
+            arrayCodigo[ultimoArray()].shift();
+            return false;
     }
-
     arrayCodigo[ultimoArray()].shift();
+    return false;
 }

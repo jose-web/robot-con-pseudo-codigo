@@ -30,7 +30,7 @@ body, html {
 }
 
 body {
-    background: url("../img/bg.png");
+    background: url("../img/bg.png"); /* Background pattern from Toptal Subtle Patterns */
     animation: mueveFondo 50s linear infinite;
     animation-play-state: paused;
 }

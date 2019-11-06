@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Robot</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
@@ -21,18 +20,21 @@
             <button type="button" class="btn btn-warning col rounded-0" data-toggle="modal"
                 data-target=".bd-example-modal-lg">Ayuda</button>
             <button id="nivelAnterior" class="col btn btn-primary rounded-0">Nivel anterior</button>
-            <div class="col bg-primary border-left border-right"><button id="nombreNivel" class="btn btn-primary h-100 w-100" disabled>Nivel
+            <div class="col bg-primary border-left border-right"><button id="nombreNivel"
+                    class="btn btn-primary h-100 w-100" disabled>Nivel
                     1</button>
             </div>
             <button id="siguienteNivel" class="col btn btn-primary rounded-0">Siguiente nivel</button>
 
             <!--CONTADOR MINAS-->
-            <div id="contadorMinas" class="col alert alert-danger rounded-0 m-0 d-flex justify-content-center alineaVerticalmente">
+            <div id="contadorMinas"
+                class="col alert alert-danger rounded-0 m-0 d-flex justify-content-center alineaVerticalmente">
                 Faltan<span>0</span>minas</div>
 
             <!--ESTELA-->
-            <label for="estela" class="col btn btn-success rounded-0 m-0 d-flex justify-content-center alineaVerticalmente">Estela <input
-                    type="checkbox" id="estela" class="badgebox">
+            <label for="estela"
+                class="col btn btn-success rounded-0 m-0 d-flex justify-content-center alineaVerticalmente">Estela
+                <input type="checkbox" id="estela" class="badgebox">
                 <span class="badge">✔</span></label>
 
 
@@ -91,38 +93,26 @@
                         <p><span style="color:green;">DEACT</span>: Desactiva una mina</p>
                     </div>
 
-                    <!--
-                    <div class="col-12 col-md-3">
-                        <p><strong>Variables</strong></p>
-                        <p>Inicialización: nombre=número</p>
-                        <p>Suma: nombre++</p>
-                        <p>Resta: nombre--</p>
-                        <p>Impresión: print nombre</p>
-                    </div>
-                    -->
                     <div class="col-12 col-md-6">
                         <p><strong>Bucles</strong></p>
                         <p><span style="color:blue;">WHILE</span>: Estructura: while (condición) (sentencias) end</p>
-                        <p><span style="color:blue;">FOR</span>: Estructura: for (<span style="color:brown;">número</span>) (sentencias) end</p>
+                        <p><span style="color:blue;">FOR</span>: Estructura: for (<span
+                                style="color:brown;">número</span>) (sentencias) end</p>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <p><strong>Condicional</strong></p>
-                        <p><span style="color:blue;">IF</span>: Estructura: if (condición) <span style="color:blue;">then</span> (sentencias) end</p>
+                        <p><span style="color:blue;">IF</span>: Estructura: if (condición) <span
+                                style="color:blue;">then</span> (sentencias) end</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-
     <!--SCRIPTS-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/confetti.min.js"></script>
     <script src="js/main.js"></script>
 

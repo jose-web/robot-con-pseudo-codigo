@@ -11,7 +11,6 @@ function copiaArray($array) {
     return copia;
 }
 
-
 function mensajeError($error) {
 
     $("body").append('<div id="alertaError" class="fixed-top alert alert-danger fade">' +
