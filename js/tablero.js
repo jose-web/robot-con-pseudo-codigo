@@ -17,6 +17,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             ];
+            numeroContadorMinas.innerHTML = 0;
             break;
 
         case 2:
@@ -33,6 +34,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             ];
+            numeroContadorMinas.innerHTML = 0;
             break;
 
         case 3:
@@ -49,6 +51,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
             ];
+            numeroContadorMinas.innerHTML = 0;
             break;
 
         case 4:
@@ -65,6 +68,7 @@ function nivelTablero() {
                 ["", "", "", "🌲", "", "", "", "", "", "", "", "", "", "", ""],
                 ["", "", "", "🌲", "", "", "", "", "", "", "", "", "", "", ""],
             ];
+            numeroContadorMinas.innerHTML = 0;
             break;
 
         case 5:
@@ -81,7 +85,7 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "🏠", "", "", "🏠"],
                 ["", "", "", "", "", "", "", "", "", "", "", "", "🏠", "", ""],
             ];
-            contadorMinas.classList.add('d-none');
+            numeroContadorMinas.innerHTML = 0;
             break;
 
         case 6:
@@ -99,7 +103,6 @@ function nivelTablero() {
                 ["", "", "", "", "", "", "", "", "", "", "", "", "", "📍", ""],
             ];
             numeroContadorMinas.innerHTML = 23;
-            contadorMinas.classList.remove('d-none');
             break;
 
         case 7:

@@ -18,20 +18,20 @@
         <div class="row h-100">
 
             <!--BOTONES-->
-            <button type="button" class="btn btn-warning col" data-toggle="modal"
+            <button type="button" class="btn btn-warning col rounded-0" data-toggle="modal"
                 data-target=".bd-example-modal-lg">Ayuda</button>
-            <button id="nivelAnterior" class="col btn btn-primary">Nivel anterior</button>
-            <div class="col bg-primary"><button id="nombreNivel" class="btn btn-primary h-100 w-100" disabled>Nivel
+            <button id="nivelAnterior" class="col btn btn-primary rounded-0">Nivel anterior</button>
+            <div class="col bg-primary border-left border-right"><button id="nombreNivel" class="btn btn-primary h-100 w-100" disabled>Nivel
                     1</button>
             </div>
-            <button id="siguienteNivel" class="col btn btn-primary ">Siguiente nivel</button>
+            <button id="siguienteNivel" class="col btn btn-primary rounded-0">Siguiente nivel</button>
 
             <!--CONTADOR MINAS-->
-            <div id="contadorMinas" class="alert alert-danger m-0 d-none alineaVerticalmente">
+            <div id="contadorMinas" class="col alert alert-danger rounded-0 m-0 d-flex justify-content-center alineaVerticalmente">
                 Faltan<span>0</span>minas</div>
 
             <!--ESTELA-->
-            <label for="estela" class="btn btn-success m-0 alineaVerticalmente">Estela <input
+            <label for="estela" class="col btn btn-success rounded-0 m-0 d-flex justify-content-center alineaVerticalmente">Estela <input
                     type="checkbox" id="estela" class="badgebox">
                 <span class="badge">✔</span></label>
 
@@ -44,11 +44,11 @@
             <!--CÓDIGO-->
             <div id="cajaDeCodigo" class="col-12 col-md-3">
                 <textarea id="texto" spellcheck="false"></textarea>
-                <pre id="textoColor" class="shadow"></pre>
+                <pre id="textoColor"></pre>
             </div>
 
             <!--BOTÓN INICIAR-->
-            <button id="btniniciar" class="h-10 col-12 btn btn-success">Iniciar</button>
+            <button id="btniniciar" class="h-10 col-12 btn btn-success rounded-0">Iniciar</button>
         </div>
 
     </div>
@@ -77,18 +77,18 @@
 
                     <div class="col-12 col-md-4">
                         <p><strong>Condiciones</strong></p>
-                        <p>NB: detecta cuando no hay bloque</p>
-                        <p>MINE: detecta cuando hay una mina</p>
-                        <p>BLOCK: detecta cuando hay algo bloqueando el paso</p>
-                        <p>NW: detecta si no has llegado al muro</p>
+                        <p><span style="color:violet;">NB</span>: detecta cuando no hay bloque</p>
+                        <p><span style="color:violet;">MINE</span>: detecta cuando hay una mina</p>
+                        <p><span style="color:violet;">BLOCK</span>: detecta cuando hay algo bloqueando el paso</p>
+                        <p><span style="color:violet;">NW</span>: detecta si no has llegado al muro</p>
                     </div>
 
                     <div class="col-12 col-md-4">
                         <p><strong>Sentencias</strong></p>
-                        <p>A: Avanza un bloque</p>
-                        <p>TL: Gira a la izquierda</p>
-                        <p>TR: Gira a la derecha</p>
-                        <p>DEACT: Desactiva una mina</p>
+                        <p><span style="color:green;">A</span>: Avanza un bloque</p>
+                        <p><span style="color:green;">TL</span>: Gira a la izquierda</p>
+                        <p><span style="color:green;">TR</span>: Gira a la derecha</p>
+                        <p><span style="color:green;">DEACT</span>: Desactiva una mina</p>
                     </div>
 
                     <!--
@@ -102,13 +102,13 @@
                     -->
                     <div class="col-12 col-md-6">
                         <p><strong>Bucles</strong></p>
-                        <p>WHILE: Estructura: while (condición) (sentencias) end</p>
-                        <p>FOR: Estructura: for (número) (sentencias) end</p>
+                        <p><span style="color:blue;">WHILE</span>: Estructura: while (condición) (sentencias) end</p>
+                        <p><span style="color:blue;">FOR</span>: Estructura: for (<span style="color:brown;">número</span>) (sentencias) end</p>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <p><strong>Condicional</strong></p>
-                        <p>IF: Estructura: if (condición) then (sentencias) end</p>
+                        <p><span style="color:blue;">IF</span>: Estructura: if (condición) <span style="color:blue;">then</span> (sentencias) end</p>
                     </div>
                 </div>
             </div>

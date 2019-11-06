@@ -32,6 +32,10 @@ function iniciar() {
     textoMinuscula = textoMinuscula.trim(); //Elimina los espacios de los extremos
     arrayTexto = textoMinuscula.split(" ");
 
+    if (arrayTexto == "") {
+        mensajeError("Debe introducir código para ejecutar el programa");
+    }
+
     let buenaSintaxis = compruebaSintaxis(codigo);
 
     console.log(buenaSintaxis, codigo);
