@@ -14,11 +14,11 @@ function compruebaSintaxis($codigo) {
     do {
         if ((compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo)) && compruebaTipoErrorIf != 0) {
             if (compruebaTipoErrorIf == 1) {
-                mensajeError("falta condicion en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea() + 1));
+                mensajeError("falta condicion en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea()));
                 error = true;
                 break;
             } else if (compruebaTipoErrorIf == 2) {
-                mensajeError("falta el 'then' en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea() + 1));
+                mensajeError("falta el 'then' en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea()));
                 error = true;
                 break;
             }
@@ -135,9 +135,9 @@ function compruebaSintaxisSentencia($codigo) {
 }
 
 function adivinaLinea() {
-
     let textoOriginal = document.getElementById("texto").value.toLowerCase();
-
+    let inicioPalabra;
+    
     textoOriginal = textoOriginal.split("\n");
 
     for (let i = 0; i < textoOriginal.length; i++) {
@@ -146,13 +146,21 @@ function adivinaLinea() {
             textoOriginal[i] = textoOriginal[i].replace(" ", "")
         }
     }
-    while (arrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
-        textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(textoOriginal[textoOriginal.length - 1].indexOf(arrayTexto[arrayTexto.length - 1]), arrayTexto[arrayTexto.length - 1]);
 
-        if (arrayTexto.length > 0) {
-            textoOriginal.shift();
-            arrayTexto.shift();
+    while (textoOriginal[textoOriginal.length - 1] == "") {
+        textoOriginal.pop();
+    }
+
+    while (arrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
+        inicioPalabra = textoOriginal[textoOriginal.length - 1].indexOf(arrayTexto[arrayTexto.length - 1]);
+
+        textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(0, inicioPalabra);
+
+        arrayTexto.pop();
+
+        if (textoOriginal[textoOriginal.length - 1] == "") {
+            textoOriginal.pop();
         }
     }
-    return textoOriginal.length;
+    return inicioPalabra!=0?textoOriginal.length-1:textoOriginal.length;
 }
