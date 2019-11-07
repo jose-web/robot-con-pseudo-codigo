@@ -98,12 +98,9 @@ var robot = {
             }
 
         } else {
-
-            console.log("choque");
             this.pintar("💥");
             clearInterval(reloj.intervalo);
             document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
-
         }
     },
 

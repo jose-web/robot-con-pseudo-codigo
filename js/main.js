@@ -53,7 +53,7 @@ function iniciar() {
                 if (arrayCodigo.length == 0) {
                     document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
                     clearInterval(reloj.intervalo);
-                    console.log("//FIN//");
+
                     return true;
                 }
 
