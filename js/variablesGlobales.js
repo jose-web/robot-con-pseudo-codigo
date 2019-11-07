@@ -150,20 +150,7 @@ var robot = {
 
     compruebaMina: function () {
         if (this.y != 11)
-            switch (this.direccion) {
-                case 0: //Arriba
-                    return this.y != -1 && tableroVirtual[this.y][this.x] == "📍";
-
-                case 1: //Izquierda
-                    return this.x != -1 && tableroVirtual[this.y][this.x] == "📍";
-
-                case 2: //Abajo
-                    return this.y != 10 && tableroVirtual[this.y][this.x] == "📍";
-
-                case 3: //Derecha
-                    return this.x != 14 && tableroVirtual[this.y][this.x] == "📍";
-
-            }
+            return tableroVirtual[this.y][this.x] == "📍";
     },
 
     // --------------------------------------------------------
@@ -175,23 +162,7 @@ var robot = {
             let numeroContadorMinas = contadorMinas.getElementsByTagName('span')[0];
             numeroContadorMinas.innerHTML--;
 
-            switch (this.direccion) {
-                case 0: //Arriba
-                    if (this.y != -1) tableroVirtual[this.y][this.x] = "";
-                    break;
-
-                case 1: //Izquierda
-                    if (this.x != -1) tableroVirtual[this.y][this.x] = "";
-                    break;
-
-                case 2: //Abajo
-                    if (this.y != 10) tableroVirtual[this.y][this.x] = "";
-                    break;
-
-                case 3: //Derecha
-                    if (this.x != 14) tableroVirtual[this.y][this.x] = "";
-                    break;
-            }
+            tableroVirtual[this.y][this.x] = "";
         }
     },
 
