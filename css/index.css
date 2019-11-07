@@ -98,7 +98,6 @@ body {
     color: transparent;
     caret-color: black;
     border: 0;
-    resize: none;
     overflow: hidden;
 }
 

@@ -11,6 +11,7 @@ Iniciar
 function iniciar() {
     contadorBucle = 0;
     robot.spawn();
+    document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
     clearInterval(reloj.intervalo);
     codigo = new Array();
     estela = document.getElementById('estela').checked;
