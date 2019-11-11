@@ -36,7 +36,7 @@ function iniciar() {
     }
 
     let buenaSintaxis = compruebaSintaxis(codigo);
-
+    console.log(buenaSintaxis, codigo);
     if (buenaSintaxis) {
 
         //Animación fondo
@@ -90,9 +90,9 @@ window.onload = function () {
     document.getElementById("ver").onclick = function () {
         document.getElementById("pantallaDeInicio").style.top = '-100%';
         setTimeout(function () {
-                document.getElementById("pantallaDeInicio").style.display = 'none';
-                document.getElementsByTagName('html')[0].style.overflow = 'auto';
-            }, 1000
+            document.getElementById("pantallaDeInicio").style.display = 'none';
+            document.getElementsByTagName('html')[0].style.overflow = 'auto';
+        }, 1000
         );
     }
 

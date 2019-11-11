@@ -41,7 +41,7 @@ function compruebaSintaxis($codigo) {
                 break;
 
             } else if (compruebaTipoVariable == 4) {
-                let variable = arrayTexto[0].substr(0, arrayTexto[0].length - 2);
+                let variable = arrayTexto[0].indexOf("++") > 0 ? arrayTexto[0].substr(0, arrayTexto[0].length - 2) : arrayTexto[0];
                 mensajeError("'" + variable + "' no es una variable declarada en la línea " + adivinaLinea());
                 error = true;
                 break;
@@ -142,9 +142,10 @@ function compruebaSintaxisBucleIF($codigo) {
 
 function compruebaVariables($codigo) {
     if (arrayTexto[0].indexOf("=") > 0) {
+
         let sentenciaDividida = arrayTexto[0].split("=");
 
-        if (!Number.isInteger(sentenciaDividida[1] - 1)) {
+        if (sentenciaDividida[1] == "" || !Number.isInteger(sentenciaDividida[1] - 1)) {
             return 2;
         }
 
@@ -163,11 +164,46 @@ function compruebaVariables($codigo) {
         arrayTexto.shift();
         return 1;
 
+    } else if (arrayTexto[1] == "=") {
+
+        if (!Number.isInteger(arrayTexto[2] - 1)) {
+            return 2;
+        }
+
+        //Comprueba que no sea una palabra clave
+        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then"]);
+        for (let i = 0; i < compruebaTodo.length; i++) {
+            for (let o = 0; o < compruebaTodo[i].length; o++) {
+                if (arrayTexto[0] == compruebaTodo[i][o]) {
+                    return 3;
+                }
+            }
+        }
+
+        variables.push(arrayTexto[0]);
+        $codigo.push(arrayTexto[0] + arrayTexto[1] + arrayTexto[2]);
+        arrayTexto.shift();
+        arrayTexto.shift();
+        arrayTexto.shift();
+        return 1;
+
     } else if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
         let variableRecortada = arrayTexto[0].substr(0, arrayTexto[0].length - 2);
         for (let i = 0; i < variables.length; i++) {
             if (variables[i] == variableRecortada) {
                 $codigo.push(arrayTexto[0]);
+                arrayTexto.shift();
+                return 1;
+            }
+        }
+        return 4;
+
+    } else if (arrayTexto[1] == "++" || arrayTexto[1] == "--") {
+
+        for (let i = 0; i < variables.length; i++) {
+            if (variables[i] == arrayTexto[0]) {
+                $codigo.push(arrayTexto[0] + arrayTexto[1]);
+                arrayTexto.shift();
                 arrayTexto.shift();
                 return 1;
             }
