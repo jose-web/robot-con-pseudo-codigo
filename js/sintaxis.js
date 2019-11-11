@@ -13,29 +13,45 @@ function compruebaSintaxis($codigo) {
 
     do {
         if ((compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo)) && compruebaTipoErrorIf != 0) {
-            if (compruebaTipoErrorIf == 1)
+            if (compruebaTipoErrorIf == 1) {
                 mensajeError("falta condicion en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea()));
-            else if (compruebaTipoErrorIf == 2)
+                error = true;
+                break;
+            } else if (compruebaTipoErrorIf == 2) {
                 mensajeError("falta el 'then' en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea()));
-
-            error = true;
-            break;
+                error = true;
+                break;
+            }
 
         } else if (cuentaEnd > 0 && arrayTexto[0] == "end") {
             arrayTexto.shift();
             cuentaEnd--;
             return false;
 
-        } else if ((compruebaTipoVariable = compruebaVariables($codigo)) && compruebaTipoVariable != 0) {
-            if (compruebaTipoVariable == 1)
-                mensajeError("EL valor de la variable no es un número en la línea " + (adivinaLinea()));
-            else if (compruebaTipoVariable == 2)
-                mensajeError("'" + arrayTexto[0].substr(0, arrayTexto[0].length - 2) + "' no puede ser una variable en la línea " + (adivinaLinea()));
-            else if (compruebaTipoVariable == 2)
-                mensajeError("Error con variables en la línea " + (adivinaLinea()));
+        } else if ((compruebaTipoVariable = compruebaVariables($codigo)) && compruebaTipoVariable != -1) {
+            if (compruebaTipoVariable == 2) {
+                mensajeError("En la declaración de la variable falta el número en la línea " + adivinaLinea());
+                error = true;
+                break;
 
-            error = true;
-            break;
+            } else if (compruebaTipoVariable == 3) {
+                let variable = arrayTexto[0].split("=");
+                mensajeError("'" + variable[0] + "' no puede ser una variable en la línea " + adivinaLinea());
+                error = true;
+                break;
+
+            } else if (compruebaTipoVariable == 4) {
+                let variable = arrayTexto[0].substr(0, arrayTexto[0].length - 2);
+                mensajeError("'" + variable + "' no es una variable declarada en la línea " + adivinaLinea());
+                error = true;
+                break;
+
+            } else if (compruebaTipoVariable == 5) {
+                mensajeError("'" + arrayTexto[1] + "' no es una variable declarada en la línea " + adivinaLinea());
+                error = true;
+                break;
+
+            }
 
         } else if (compruebaSintaxisSentencia($codigo)) {
             contadorExistenciaSentencia++;
@@ -129,15 +145,15 @@ function compruebaVariables($codigo) {
         let sentenciaDividida = arrayTexto[0].split("=");
 
         if (!Number.isInteger(sentenciaDividida[1] - 1)) {
-            return 1;
+            return 2;
         }
 
         //Comprueba que no sea una palabra clave
-        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), "then");
+        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then"]);
         for (let i = 0; i < compruebaTodo.length; i++) {
             for (let o = 0; o < compruebaTodo[i].length; o++) {
                 if (sentenciaDividida[0] == compruebaTodo[i][o]) {
-                    return 2;
+                    return 3;
                 }
             }
         }
@@ -145,9 +161,34 @@ function compruebaVariables($codigo) {
         variables.push(sentenciaDividida[0]);
         $codigo.push(arrayTexto[0]);
         arrayTexto.shift();
+        return 1;
+
+    } else if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
+        let variableRecortada = arrayTexto[0].substr(0, arrayTexto[0].length - 2);
+        for (let i = 0; i < variables.length; i++) {
+            if (variables[i] == variableRecortada) {
+                $codigo.push(arrayTexto[0]);
+                arrayTexto.shift();
+                return 1;
+            }
+        }
+        return 4;
+
+    } else if (arrayTexto[0] == "print") {
+        for (let i = 0; i < variables.length; i++) {
+            if (variables[i] == arrayTexto[1]) {
+                $codigo.push(arrayTexto[0]);
+                $codigo.push(arrayTexto[0]);
+                arrayTexto.shift();
+                arrayTexto.shift();
+                return 1;
+            }
+        }
+        return 5;
     }
     return 0;
 }
+
 
 function compruebaSintaxisSentencia($codigo) {
     let contador = 0;
