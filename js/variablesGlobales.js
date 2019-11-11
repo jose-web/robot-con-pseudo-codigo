@@ -216,3 +216,5 @@ var ultimoArray = () => arrayCodigo.length - 1 == -1 ? 0 : arrayCodigo.length - 
 var nivel = 1;
 
 var estela = document.getElementById('estela').checked;
+
+var variables = new Array();

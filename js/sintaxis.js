@@ -28,7 +28,7 @@ function compruebaSintaxis($codigo) {
             cuentaEnd--;
             return false;
 
-        } else if ((compruebaTipoVariable = compruebaVariables($codigo)) && compruebaTipoVariable != -1) {
+        } else if ((compruebaTipoVariable = compruebaSintaxisVariables($codigo)) && compruebaTipoVariable != -1) {
             if (compruebaTipoVariable == 2) {
                 mensajeError("En la declaración de la variable falta el número en la línea " + adivinaLinea());
                 error = true;
@@ -140,7 +140,7 @@ function compruebaSintaxisBucleIF($codigo) {
     return 0;
 }
 
-function compruebaVariables($codigo) {
+function compruebaSintaxisVariables($codigo) {
     if (arrayTexto[0].indexOf("=") > 0) {
 
         let sentenciaDividida = arrayTexto[0].split("=");
@@ -214,7 +214,7 @@ function compruebaVariables($codigo) {
         for (let i = 0; i < variables.length; i++) {
             if (variables[i] == arrayTexto[1]) {
                 $codigo.push(arrayTexto[0]);
-                $codigo.push(arrayTexto[0]);
+                $codigo.push(arrayTexto[1]);
                 arrayTexto.shift();
                 arrayTexto.shift();
                 return 1;

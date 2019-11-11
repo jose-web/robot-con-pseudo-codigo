@@ -61,6 +61,28 @@ function compruebaBucleIf() {
 }
 
 /*------------------------------------------------
+-------------------- VARIABLES -------------------
+------------------------------------------------*/
+function compruebaVariables() {
+    if (arrayCodigo[ultimoArray()][0].indexOf("=") > 1) {
+        let nuevaVariable = arrayCodigo[ultimoArray()][0].split("=");
+        variables[nuevaVariable[0]] = nuevaVariable[1];
+
+    } else if (arrayCodigo[ultimoArray()][0].indexOf("++") > 1) {
+        let suma = arrayCodigo[ultimoArray()][0].substr(0, arrayCodigo[ultimoArray()][0].length - 2);
+        variables[suma]++;
+
+    } else if (arrayCodigo[ultimoArray()][0].indexOf("--") > 1) {
+        let suma = arrayCodigo[ultimoArray()][0].substr(0, arrayCodigo[ultimoArray()][0].length - 2);
+        variables[suma]--;
+
+    } else if (arrayCodigo[ultimoArray()][0] == "print") {
+        console.log(arrayCodigo[ultimoArray()][1]);
+        alert(arrayCodigo[ultimoArray()][1] + " = " + variables[arrayCodigo[ultimoArray()][1]]);
+    }
+}
+
+/*------------------------------------------------
 ------------------- SENTENCIAS -------------------
 ------------------------------------------------*/
 

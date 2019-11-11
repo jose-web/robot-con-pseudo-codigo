@@ -66,6 +66,8 @@ function iniciar() {
                 }
 
                 compruebaBucleIf();
+                
+                compruebaVariables();
 
                 if (!compruebaSentencias()) {
                     repetir = true;
