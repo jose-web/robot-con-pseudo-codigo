@@ -36,7 +36,7 @@ function iniciar() {
     }
 
     let buenaSintaxis = compruebaSintaxis(codigo);
-    console.log(buenaSintaxis, codigo);
+    // console.log(buenaSintaxis, codigo);
     if (buenaSintaxis) {
 
         //Animación fondo
@@ -66,7 +66,7 @@ function iniciar() {
                 }
 
                 compruebaBucleIf();
-                
+
                 compruebaVariables();
 
                 if (!compruebaSentencias()) {
@@ -122,11 +122,14 @@ window.onload = function () {
         let textoSinColor = this.value.toString();
         let nuevoTextoColor = textoSinColor;
 
-        nuevoTextoColor = nuevoTextoColor.replace(/while|for|if|then|end/gi, "<textoColor style='color:blue'><b>$&</b></textoColor>");
+        nuevoTextoColor = nuevoTextoColor.replace(/while|for|if|then|end|print/gi, "<textoColor style='color:blue'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/0|1|2|3|4|5|6|7|8|9/g, "<textoColor style='color:brown'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/nb|mine|block|nw/gi, "<textoColor style='color:violet'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/a|tl|tr|deact/gi, "<textoColor style='color:green'><b>$&</b></textoColor>");
 
-        document.getElementById("textoColor").innerHTML = nuevoTextoColor;
+        if (nuevoTextoColor.trim() == "")
+            document.getElementById("textoColor").innerHTML = "<span style='color:gray;'>Escriba aquí</span>";
+        else
+            document.getElementById("textoColor").innerHTML = nuevoTextoColor;
     };
 };
