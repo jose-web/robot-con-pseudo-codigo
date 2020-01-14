@@ -38,6 +38,10 @@ function iniciar() {
     let buenaSintaxis = compruebaSintaxis(codigo);
     // console.log(buenaSintaxis, codigo);
     if (buenaSintaxis) {
+        let consola = document.getElementById("consola");
+        let listadoVariables = document.getElementById("listadoVariables");
+        consola.innerHTML = "<p class='mb-0' style='color:blue'>• INICIO DE EJECUCIÓN •</p>";
+        listadoVariables.innerHTML = "";
 
         //Animación fondo
         document.getElementsByTagName("body")[0].style.animationPlayState = 'running';
@@ -54,7 +58,7 @@ function iniciar() {
                 if (arrayCodigo.length == 0) {
                     document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
                     clearInterval(reloj.intervalo);
-
+                    consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p>";
                     return true;
                 }
 

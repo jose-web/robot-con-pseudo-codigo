@@ -81,15 +81,17 @@ function compruebaVariables() {
         pintaVariables();
 
     } else if (arrayCodigo[ultimoArray()][0] == "print") {
-        alert(arrayCodigo[ultimoArray()][1] + " = " + variables[arrayCodigo[ultimoArray()][1]]);
+        let consola = document.getElementById("consola");
+        consola.innerHTML += "<p class='mb-0'>" + arrayCodigo[ultimoArray()][1] + " = " + variables[arrayCodigo[ultimoArray()][1]] + "</p>";
     }
 }
 
 function pintaVariables() {
     let listadoVariables = document.getElementById("listadoVariables");
     let listado = "";
-    variables.forEach((variable, valor) => {
-        listado += variable + " = " + variables[variable] + "<br/>";
+    variables.forEach((variable) => {
+        if (typeof variables[variable] != "undefined")
+            listado += variable + " = " + variables[variable] + "<br/>";
     });
     listadoVariables.innerHTML = listado;
 }
