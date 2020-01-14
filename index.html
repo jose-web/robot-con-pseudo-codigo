@@ -12,10 +12,13 @@
 
 <body>
     <div class="container-fluid bg-light">
+
+        <!--BOTONES ARRIBA-->
         <div class="row">
             <div class="col-12">
                 <div class="row">
-                    <button class="col-12 col-md-3 btn btn-warning rounded-0">Ayuda</button>
+                    <button class="col-12 col-md-3 btn btn-warning rounded-0" data-toggle="modal"
+                        data-target=".bd-example-modal-lg">Ayuda</button>
                     <button id="nivelAnterior" class="col btn btn-primary rounded-0">Anterior</button>
                     <div id="nombreNivel" class="col btn btn-primary rounded-0 disabled">Nivel 1</div>
                     <button id="siguienteNivel" class="col btn btn-primary rounded-0">Siguiente</button>
@@ -26,7 +29,11 @@
                 </div>
             </div>
         </div>
+
+        <!--FILA CENTRAL-->
         <div class="row">
+
+            <!--COLUMNA IZQUIERDA-->
             <div class="col-md-3 order-1 ">
                 <div class="row">
                     <div id="contadorMinas" class="col-12 text-center bg-danger text-light p-1">
@@ -46,9 +53,13 @@
                     </div>
                 </div>
             </div>
+
+            <!--TABLA-->
             <div class="col-12 col-md-6 p-2 text-center order-md-2">
                 <div id="tabla"></div>
             </div>
+
+            <!--COLUMNA DERECHA-->
             <div class="col-md-3 order-2 order-md-3">
                 <div class="row h-100">
                     <pre id="textoColor"><span style="color:gray;">Escriba aquí</span></pre>
@@ -56,10 +67,82 @@
                 </div>
             </div>
         </div>
+
+        <!--BOTÓN INICIAR-->
         <div class="row">
             <button id="btniniciar" class="col btn btn-success rounded-0">Iniciar</button>
         </div>
+
     </div>
+
+    <!--AYUDA-->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Ayuda</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="row p-4">
+
+                    <div class="col-12 col-md-4">
+                        <p><strong>Significado iconos</strong></p>
+                        <p>Entrada: 👆</p>
+                        <p>Salida: 🚩</p>
+                        <p>Mina: 📍</p>
+                        <p>Obstáculos: 🌲 🗿 🏰 🏠</p>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <p><strong>Condiciones</strong></p>
+                        <p><span style="color:violet;">NB</span>: detecta cuando no hay bloque</p>
+                        <p><span style="color:violet;">MINE</span>: detecta cuando hay una mina</p>
+                        <p><span style="color:violet;">BLOCK</span>: detecta cuando hay algo bloqueando el paso</p>
+                        <p><span style="color:violet;">NW</span>: detecta si no has llegado al muro</p>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <p><strong>Sentencias</strong></p>
+                        <p><span style="color:green;">A</span>: Avanza un bloque</p>
+                        <p><span style="color:green;">TL</span>: Gira a la izquierda</p>
+                        <p><span style="color:green;">TR</span>: Gira a la derecha</p>
+                        <p><span style="color:green;">DEACT</span>: Desactiva una mina</p>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <p><strong>Bucles</strong></p>
+                        <p><span style="color:blue;">WHILE</span>: Estructura: <span style="color:blue;">while</span>
+                            (condición) (sentencias) <span style="color:blue;">end</span></p>
+                        <p><span style="color:blue;">FOR</span>: Estructura: <span style="color:blue;">for</span> (<span
+                                style="color:brown;">número</span>) (sentencias) <span style="color:blue;">end</span>
+                        </p>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <p><strong>Condicional</strong></p>
+                        <p><span style="color:blue;">IF</span>: Estructura: <span style="color:blue;">if</span>
+                            (condición) <span style="color:blue;">then</span> (sentencias) <span
+                                style="color:blue;">end</span></p>
+                    </div>
+
+                    <div class="col-12 col-md-4">
+                        <p><strong>Variables</strong></p>
+                        <p>Inicialización: variable = 0</p>
+                        <p>Suma: variable++</p>
+                        <p>Resta: variable--</p>
+                        <p>Visualización: <span style="color:blue;">print</span> variable</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--SCRIPTS-->
     <script src="js/jquery-3.3.1.slim.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/confetti.min.js"></script>
