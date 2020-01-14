@@ -89,6 +89,7 @@ window.onload = function () {
 
     document.getElementById("texto").value = "";
 
+    /*
     document.getElementById("ver").onclick = function () {
         document.getElementById("pantallaDeInicio").style.top = '-100%';
         setTimeout(function () {
@@ -97,7 +98,7 @@ window.onload = function () {
         }, 1000
         );
     }
-
+*/
     document.getElementById("btniniciar").onclick = function () {
         iniciar();
     };
@@ -133,3 +134,19 @@ window.onload = function () {
             document.getElementById("textoColor").innerHTML = nuevoTextoColor;
     };
 };
+
+$(window).ready(function () {
+    redimensionaTabla();
+    pintarTablero();
+});
+
+$(window).resize(function () {
+    redimensionaTabla();
+});
+
+function redimensionaTabla() {
+    $("#tabla").css({
+        fontSize: $("#tabla").width() * 0.03,
+        height: $("#tabla").width() * 0.70
+    });
+}

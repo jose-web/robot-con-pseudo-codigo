@@ -1,64 +1,5 @@
-html {
-    overflow: hidden;
-}
-
-body, html {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-}
-
-#pantallaDeInicio {
-    position: fixed;
-    top:0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    background: rgba(40, 167, 70, 1);
-    background: -moz-linear-gradient(-45deg, rgba(40, 167, 70, 1) 0%, rgba(40, 167, 70, 1) 49%, rgba(0, 123, 255, 1) 49%, rgba(0, 123, 255, 1) 80%, rgba(255, 193, 7, 1) 80%, rgba(255, 193, 7, 1) 100%);
-    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(40, 167, 70, 1)), color-stop(49%, rgba(40, 167, 70, 1)), color-stop(49%, rgba(0, 123, 255, 1)), color-stop(80%, rgba(0, 123, 255, 1)), color-stop(80%, rgba(255, 193, 7, 1)), color-stop(100%, rgba(255, 193, 7, 1)));
-    background: -webkit-linear-gradient(-45deg, rgba(40, 167, 70, 1) 0%, rgba(40, 167, 70, 1) 49%, rgba(0, 123, 255, 1) 49%, rgba(0, 123, 255, 1) 80%, rgba(255, 193, 7, 1) 80%, rgba(255, 193, 7, 1) 100%);
-    background: -o-linear-gradient(-45deg, rgba(40, 167, 70, 1) 0%, rgba(40, 167, 70, 1) 49%, rgba(0, 123, 255, 1) 49%, rgba(0, 123, 255, 1) 80%, rgba(255, 193, 7, 1) 80%, rgba(255, 193, 7, 1) 100%);
-    background: -ms-linear-gradient(-45deg, rgba(40, 167, 70, 1) 0%, rgba(40, 167, 70, 1) 49%, rgba(0, 123, 255, 1) 49%, rgba(0, 123, 255, 1) 80%, rgba(255, 193, 7, 1) 80%, rgba(255, 193, 7, 1) 100%);
-    background: linear-gradient(135deg, rgba(40, 167, 70, 1) 0%, rgba(40, 167, 70, 1) 49%, rgba(0, 123, 255, 1) 49%, rgba(0, 123, 255, 1) 80%, rgba(255, 193, 7, 1) 80%, rgba(255, 193, 7, 1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28a746', endColorstr='#ffc107', GradientType=1);
-    transition: 1s;
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-
-#pantallaDeInicio div {
-    flex-basis: 50%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-#pantallaDeInicio h1 {
-    margin-top: auto; 
-    text-align: center;
-    font-size: 6em;
-    color:rgba(255, 193, 7, 1);
-    text-shadow: -0.05em 0 black, 0 0.05em black, 0.05em 0 black, 0 -0.05em black;
-    letter-spacing: 0.1em;
-}
-
-#pantallaDeInicio button {
-    flex-basis: 3em;
-}
-
-#pantallaDeInicio p {
-    margin-top: auto; 
-    text-align: center;
-    color:rgb(190, 190, 190);
-}
-
 #tabla {
-    width: 100vh;
-    height: 70vh;
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
 }
 
 .fila-casilla {
@@ -70,7 +11,6 @@ body, html {
     width: 6.6%;
     float: left;
     text-align: center;
-    font-size: 3vh;
 }
 
 #casillaEspecial {
@@ -80,71 +20,57 @@ body, html {
 }
 
 body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
     background: url("../img/bg.png");
-    /* Background pattern from Toptal Subtle Patterns */
-    animation: mueveFondo 50s linear infinite;
-    animation-play-state: paused;
 }
 
-#cajaDeCodigo {
-    overflow: hidden;
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
-    background-color: lightgray;
+#estela {
+    display: none;
 }
 
-#texto {
-    position: absolute;
-    background-color: transparent;
-    color: transparent;
-    caret-color: black;
-    border: 0;
-    overflow: hidden;
+#casillaEstela {
+    background-color: white;
+    color: white;
+    width: 2.5em;
+    font-size: 0.9em;
+    display: inline-block;
+    border-radius: 0.5em;
+    margin-left: 0.5em;
 }
 
-#textoColor {
-    background-color: rgba(211, 211, 211, 0.363);
+#estela:checked+#casillaEstela {
+    color: green;
 }
 
-#textoColor, #texto {
-    width: 1000%;
-    height: 100%;
+#texto, #textoColor {
     vertical-align: middle;
     line-height: normal;
     font-family: 'Courier New', Courier, monospace;
     font-size: 1rem;
-    line-height: normal;
     padding: 1em;
+    min-height: 3em;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
 }
 
-@keyframes mueveFondo {
-    0% {
-        background-position: 0% 100%;
-    }
-    100% {
-        background-position: 100% 0%;
-    }
-}
-
-.badgebox {
-    opacity: 0;
-}
-
-.badgebox+.badge {
-    text-indent: -999999px;
-    width: 3em;
+#textoColor {
+    width: 100%;
+    height: 100%;
     background-color: white;
-    color: green;
+    border: 0.1em solid gray;
 }
 
-.badgebox:checked+.badge {
-    text-indent: 0;
-}
-
-.alineaVerticalmente {
-    display: flex;
-    align-items: center;
-}
-
-#contadorMinas span {
-    margin: auto 0.3em auto 0.3em;
+#texto {
+    position: absolute;
+    color: transparent;
+    background-color: transparent;
+    caret-color: black;
+    border: 0;
+    resize: none;
 }

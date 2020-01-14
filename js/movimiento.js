@@ -64,21 +64,34 @@ function compruebaBucleIf() {
 -------------------- VARIABLES -------------------
 ------------------------------------------------*/
 function compruebaVariables() {
+
     if (arrayCodigo[ultimoArray()][0].indexOf("=") > 0) {
         let nuevaVariable = arrayCodigo[ultimoArray()][0].split("=");
         variables[nuevaVariable[0]] = nuevaVariable[1];
+        pintaVariables();
 
     } else if (arrayCodigo[ultimoArray()][0].indexOf("++") > 0) {
         let suma = arrayCodigo[ultimoArray()][0].substr(0, arrayCodigo[ultimoArray()][0].length - 2);
         variables[suma]++;
+        pintaVariables();
 
     } else if (arrayCodigo[ultimoArray()][0].indexOf("--") > 0) {
         let suma = arrayCodigo[ultimoArray()][0].substr(0, arrayCodigo[ultimoArray()][0].length - 2);
         variables[suma]--;
+        pintaVariables();
 
     } else if (arrayCodigo[ultimoArray()][0] == "print") {
         alert(arrayCodigo[ultimoArray()][1] + " = " + variables[arrayCodigo[ultimoArray()][1]]);
     }
+}
+
+function pintaVariables() {
+    let listadoVariables = document.getElementById("listadoVariables");
+    let listado = "";
+    variables.forEach((variable, valor) => {
+        listado += variable + " = " + variables[variable] + "<br/>";
+    });
+    listadoVariables.innerHTML = listado;
 }
 
 /*------------------------------------------------
