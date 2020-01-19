@@ -14,13 +14,19 @@ function compruebaSintaxis($codigo) {
     do {
         if ((compruebaTipoErrorIf = compruebaSintaxisBucleIF($codigo)) && compruebaTipoErrorIf != 0) {
             if (compruebaTipoErrorIf == 1) {
-                mensajeError("falta condicion en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea()));
+                mostrarConsola("falta condicion en el '" + arrayTexto[0] + "'");
                 error = true;
-                break;
+                arrayTexto.shift();
+
+                if (arrayTexto[0] == "then")
+                    arrayTexto.shift();
+
             } else if (compruebaTipoErrorIf == 2) {
-                mensajeError("falta el 'then' en el '" + arrayTexto[0] + "' en la línea " + (adivinaLinea()));
+                mostrarConsola("falta el 'then' en el '" + arrayTexto[0] + "'");
                 error = true;
-                break;
+                arrayTexto.shift();
+                arrayTexto.shift();
+
             }
 
         } else if (cuentaEnd > 0 && arrayTexto[0] == "end") {
@@ -29,27 +35,36 @@ function compruebaSintaxis($codigo) {
             return false;
 
         } else if ((compruebaTipoVariable = compruebaSintaxisVariables($codigo)) && compruebaTipoVariable != -1) {
-            if (compruebaTipoVariable == 2) {
-                mensajeError("En la declaración de la variable falta el número en la línea " + adivinaLinea());
+            if (compruebaTipoVariable == 2) { // Declaración separado
+                mostrarConsola("En la declaración de la variable '" + arrayTexto[0] + "' falta el número");
                 error = true;
-                break;
+                arrayTexto.shift();
+                arrayTexto.shift();
+                arrayTexto.shift();
 
-            } else if (compruebaTipoVariable == 3) {
+            } else if (compruebaTipoVariable == 3) { // Declaración junto
                 let variable = arrayTexto[0].split("=");
-                mensajeError("'" + variable[0] + "' no puede ser una variable en la línea " + adivinaLinea());
+                mostrarConsola("'" + variable[0] + "' no puede ser una variable");
                 error = true;
-                break;
+                arrayTexto.shift();
 
-            } else if (compruebaTipoVariable == 4) {
-                let variable = arrayTexto[0].indexOf("++") > 0 ? arrayTexto[0].substr(0, arrayTexto[0].length - 2) : arrayTexto[0];
-                mensajeError("'" + variable + "' no es una variable declarada en la línea " + adivinaLinea());
+            } else if (compruebaTipoVariable == 4) { // Suma/resta separado
+                mostrarConsola("'" + arrayTexto[0] + "' no es una variable declarada");
                 error = true;
-                break;
+                arrayTexto.shift();
+                arrayTexto.shift();
 
-            } else if (compruebaTipoVariable == 5) {
-                mensajeError("'" + arrayTexto[1] + "' no es una variable declarada en la línea " + adivinaLinea());
+            } else if (compruebaTipoVariable == 5) { // Suma/resta junto
+                let variable = arrayTexto[0].substr(0, arrayTexto[0].length - 2);
+                mostrarConsola("'" + variable + "' no es una variable declarada");
                 error = true;
-                break;
+                arrayTexto.shift();
+
+            } else if (compruebaTipoVariable == 6) { // Print
+                mostrarConsola("'" + arrayTexto[1] + "' no es una variable declarada");
+                error = true;
+                arrayTexto.shift();
+                arrayTexto.shift();
 
             }
 
@@ -61,23 +76,26 @@ function compruebaSintaxis($codigo) {
         let endSolo = cuentaEnd == 0 && arrayTexto[0] == "end"; //Detecta si existe un end sin bucle
 
         if (endSolo) {
-            mensajeError("Se ha encontrado un 'end' sin bucle en la línea " + adivinaLinea());
+            mostrarConsola("Se ha encontrado un 'end' sin bucle");
             error = true;
-            break;
+            arrayTexto.shift();
+
 
         } else if (bucleSinCerrar) {
-            mensajeError("Se " + (cuentaEnd > 1 ? "han" : "ha") + " encontrado " + cuentaEnd + (cuentaEnd > 1 ? " bucles" : " bucle") + " sin cerrar en la línea " + adivinaLinea());
+            mostrarConsola("Se " + (cuentaEnd > 1 ? "han" : "ha") + " encontrado " + cuentaEnd + (cuentaEnd > 1 ? " bucles" : " bucle") + " sin cerrar ");
             error = true;
-            break;
+            cuentaEnd = 0;
+
 
         } else if (contadorExistenciaSentencia == 2 && arrayTexto.length > 0) {
-            mensajeError("Error con la sentencia '" + arrayTexto[0] + "' en la línea " + adivinaLinea());
+            mostrarConsola("La sentencia '" + arrayTexto[0] + "' no existe ");
             error = true;
-            break;
+            arrayTexto.shift();
+            contadorExistenciaSentencia = 0;
 
         }
 
-    } while (arrayTexto.length > 0 && !error);
+    } while (arrayTexto.length > 0 || cuentaEnd > 0);
 
     contadorExistenciaSentencia = 0;
     cuentaEnd = 0;
@@ -141,12 +159,12 @@ function compruebaSintaxisBucleIF($codigo) {
 }
 
 function compruebaSintaxisVariables($codigo) {
-    if (arrayTexto[0].indexOf("=") > 0) {
+    if (typeof arrayTexto[0] != "undefined" && arrayTexto[0].indexOf("=") > 0) {
 
         let sentenciaDividida = arrayTexto[0].split("=");
 
         if (sentenciaDividida[1] == "" || !Number.isInteger(sentenciaDividida[1] - 1)) {
-            return 2;
+            return 3;
         }
 
         //Comprueba que no sea una palabra clave
@@ -187,7 +205,7 @@ function compruebaSintaxisVariables($codigo) {
         arrayTexto.shift();
         return 1;
 
-    } else if (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0) {
+    } else if (typeof arrayTexto[0] != "undefined" && (arrayTexto[0].indexOf("++") > 0 || arrayTexto[0].indexOf("--") > 0)) {
         let variableRecortada = arrayTexto[0].substr(0, arrayTexto[0].length - 2);
         for (let i = 0; i < variables.length; i++) {
             if (variables[i] == variableRecortada) {
@@ -196,7 +214,7 @@ function compruebaSintaxisVariables($codigo) {
                 return 1;
             }
         }
-        return 4;
+        return 5;
 
     } else if (arrayTexto[1] == "++" || arrayTexto[1] == "--") {
 
@@ -220,7 +238,7 @@ function compruebaSintaxisVariables($codigo) {
                 return 1;
             }
         }
-        return 5;
+        return 6;
     }
     return 0;
 }
@@ -242,35 +260,4 @@ function compruebaSintaxisSentencia($codigo) {
     if (contador == sentencia.length) {
         return true;
     }
-}
-
-function adivinaLinea() {
-    let textoOriginal = document.getElementById("texto").value.toLowerCase();
-    let inicioPalabra;
-
-    textoOriginal = textoOriginal.split("\n");
-
-    for (let i = 0; i < textoOriginal.length; i++) {
-        //Elimina los dobles espacios
-        while (textoOriginal[i].indexOf(" ") != -1) {
-            textoOriginal[i] = textoOriginal[i].replace(" ", "")
-        }
-    }
-
-    while (textoOriginal[textoOriginal.length - 1] == "") {
-        textoOriginal.pop();
-    }
-
-    while (arrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
-        inicioPalabra = textoOriginal[textoOriginal.length - 1].indexOf(arrayTexto[arrayTexto.length - 1]);
-
-        textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(0, inicioPalabra);
-
-        arrayTexto.pop();
-
-        if (textoOriginal[textoOriginal.length - 1] == "") {
-            textoOriginal.pop();
-        }
-    }
-    return inicioPalabra != 0 ? textoOriginal.length - 1 : textoOriginal.length;
 }

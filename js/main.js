@@ -9,6 +9,8 @@ document.write('<scr' + 'ipt type="text/javascript" src="js/movimiento.js" ></sc
 Iniciar
 -----------------------------------------------*/
 function iniciar() {
+    let consola = document.getElementById("consola");
+    consola.innerHTML = "";
     contadorBucle = 0;
     robot.spawn();
     document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
@@ -32,7 +34,9 @@ function iniciar() {
     arrayTexto = textoMinuscula.split(" ");
 
     if (arrayTexto == "") {
-        mensajeError("Debe introducir código para ejecutar el programa");
+        let consola = document.getElementById("consola");
+        consola.innerHTML += "<p style='color:red'>Debe introducir código para ejecutar el programa</p>";
+        return false;
     }
 
     let buenaSintaxis = compruebaSintaxis(codigo);
@@ -58,7 +62,7 @@ function iniciar() {
                 if (arrayCodigo.length == 0) {
                     document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
                     clearInterval(reloj.intervalo);
-                    consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p>";
+                    consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p><p class='mb-0' style='color:red'>No llegaste a la meta 😭 </p>";
                     return true;
                 }
 
@@ -137,12 +141,10 @@ window.onload = function () {
         else
             document.getElementById("textoColor").innerHTML = nuevoTextoColor;
     };
-};
 
-$(window).ready(function () {
     redimensionaTabla();
     pintarTablero();
-});
+};
 
 $(window).resize(function () {
     redimensionaTabla();

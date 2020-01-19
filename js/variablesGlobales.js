@@ -71,6 +71,7 @@ var robot = {
             this.pintar(icono);
 
         } else if (this.x == 1 && this.y == 0 && this.direccion == 0) {
+            let consola = document.getElementById("consola");
             clearInterval(reloj.intervalo);
             document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
 
@@ -86,11 +87,13 @@ var robot = {
             }
 
             if (contadorMinasFinal > 0) {
-                mensajeError("Faltan " + contadorMinasFinal + " minas por desactivar");
+                consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p><p class='mb-0' style='color:red'>Faltan " + contadorMinasFinal + " minas por desactivar 😰</p>";
+
             } else {
                 if (!estela)
                     this.pintar("");
                 confetti.start();
+                consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p><p class='mb-0' style='color:green'>Conseguiste llegar a la meta 😄</p>";
 
                 setTimeout(function () {
                     confetti.stop();

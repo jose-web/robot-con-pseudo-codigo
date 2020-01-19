@@ -11,21 +11,41 @@ function copiaArray($array) {
     return copia;
 }
 
-function mensajeError($error) {
+function adivinaLinea() {
 
-    $("body").append('<div id="alertaError" class="fixed-top alert alert-danger fade">' +
-        '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' +
-        '<strong>¡Cuidado! </strong>' + $error + '</div>');
+    let textoOriginal = document.getElementById("texto").value.toLowerCase();
+    let inicioPalabra;
+    let copiaArrayTexto = arrayTexto.slice();
 
-    setTimeout(function () {
-        $("#alertaError").addClass("show");
-    }, 1);
+    textoOriginal = textoOriginal.split("\n");
 
-    setTimeout(function () {
-        $("#alertaError").removeClass("show");
-    }, 3000);
+    for (let i = 0; i < textoOriginal.length; i++) {
+        //Elimina los dobles espacios
+        while (textoOriginal[i].indexOf(" ") != -1) {
+            textoOriginal[i] = textoOriginal[i].replace(" ", "")
+        }
+    }
 
-    setTimeout(function () {
-        $("#alertaError").remove();
-    }, 3500);
+    while (textoOriginal[textoOriginal.length - 1] == "") {
+        textoOriginal.pop();
+    }
+
+    while (copiaArrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
+        inicioPalabra = textoOriginal[textoOriginal.length - 1].indexOf(copiaArrayTexto[copiaArrayTexto.length - 1]);
+
+        textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(0, inicioPalabra);
+
+        copiaArrayTexto.pop();
+
+        if (textoOriginal[textoOriginal.length - 1] == "") {
+            textoOriginal.pop();
+        }
+    }
+    return inicioPalabra != 0 ? textoOriginal.length - 1 : textoOriginal.length;
+
+}
+
+function mostrarConsola($error){
+    let consola = document.getElementById("consola");
+    consola.innerHTML+="<p style='color:red'><strong>Error en la línea "+adivinaLinea() +":</strong> "+$error+"</p>";
 }
