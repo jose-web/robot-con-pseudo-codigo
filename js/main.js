@@ -112,7 +112,7 @@ window.onload = function () {
     };
 
     document.getElementById('siguienteNivel').onclick = function () {
-        nivel = nivel == 13 ? nivel : nivel + 1;
+        nivel = nivel == mapas.length ? nivel : nivel + 1;
         document.getElementById("nombreNivel").innerHTML = "Nivel " + nivel
         clearInterval(reloj.intervalo);
         document.getElementsByTagName("body")[0].style.animationPlayState = 'paused';
@@ -143,6 +143,7 @@ window.onload = function () {
     };
 
     redimensionaTabla();
+    recogerMapasAjax();
     pintarTablero();
 };
 
