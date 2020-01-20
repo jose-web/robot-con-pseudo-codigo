@@ -15,6 +15,7 @@ function adivinaLinea() {
 
     let textoOriginal = document.getElementById("texto").value.toLowerCase();
     let inicioPalabra;
+    let cuentaSaltoLinea = 0;
     let copiaArrayTexto = arrayTexto.slice();
 
     textoOriginal = textoOriginal.split("\n");
@@ -31,21 +32,22 @@ function adivinaLinea() {
     }
 
     while (copiaArrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
+        cuentaSaltoLinea = 0;
         inicioPalabra = textoOriginal[textoOriginal.length - 1].indexOf(copiaArrayTexto[copiaArrayTexto.length - 1]);
 
         textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(0, inicioPalabra);
 
         copiaArrayTexto.pop();
 
-        if (textoOriginal[textoOriginal.length - 1] == "") {
+        while (textoOriginal[textoOriginal.length - 1] == "") {
             textoOriginal.pop();
+            cuentaSaltoLinea++;
         }
     }
-    return inicioPalabra != 0 ? textoOriginal.length - 1 : textoOriginal.length;
-
+    return inicioPalabra != 0 ? textoOriginal.length - 1 : cuentaSaltoLinea > 1 ? textoOriginal.length + cuentaSaltoLinea - 1 : textoOriginal.length;
 }
 
-function mostrarConsola($error){
+function mostrarConsola($error) {
     let consola = document.getElementById("consola");
-    consola.innerHTML+="<p style='color:red'><strong>Error en la línea "+adivinaLinea() +":</strong> "+$error+"</p>";
+    consola.innerHTML += "<p style='color:red'><strong>Error en la línea " + adivinaLinea() + ":</strong> " + $error + "</p>";
 }
