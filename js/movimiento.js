@@ -89,9 +89,11 @@ function compruebaVariables() {
 function pintaVariables() {
     let listadoVariables = document.getElementById("listadoVariables");
     let listado = "";
+    let variablesVisibles = new Array();
     variables.forEach((variable) => {
-        if (typeof variables[variable] != "undefined")
+        if (typeof variables[variable] != "undefined" && variablesVisibles.indexOf(variable) == -1)
             listado += variable + " = " + variables[variable] + "<br/>";
+        variablesVisibles.push(variable);
     });
     listadoVariables.innerHTML = listado;
 }
