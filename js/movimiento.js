@@ -14,6 +14,9 @@ function compruebaBucleIf() {
         let esMine = arrayCodigo[ultimoArray()][0][0] == "mine" && robot.compruebaMina();
         let esMineIf = segundoParametro == "mine" && robot.compruebaMina();
 
+        let esMineNext = arrayCodigo[ultimoArray()][0][0] == "mine next" && robot.compruebaMinaSiguiente();
+        let esMineNextIf = segundoParametro == "mine next" && robot.compruebaMinaSiguiente();
+
         let esBlock = arrayCodigo[ultimoArray()][0][0] == "block" && !robot.compruebaBloque();
         let esBlockIf = segundoParametro == "block" && !robot.compruebaBloque();
 
@@ -22,7 +25,7 @@ function compruebaBucleIf() {
 
 
         if (numero >= 0) {
-            if (esNbIf || esMineIf || esBlockIf || esMuroIf) { // IF 
+            if (esNbIf || esMineIf || esBlockIf || esMuroIf || esMineNextIf) { // IF 
                 arrayCodigo[ultimoArray()][0].shift(); //Borra número
                 arrayCodigo[ultimoArray()][0].shift(); //Borra condición
 
@@ -49,7 +52,7 @@ function compruebaBucleIf() {
                 compruebaBucleIf();
             }
 
-        } else if (esNb || esMine || esBlock || esMuro) { // WHILE
+        } else if (esNb || esMine || esBlock || esMuro || esMineNext) { // WHILE
             let copia = arrayCodigo[ultimoArray()][0].slice();
             arrayCodigo.push(copiaArray(copia));
             arrayCodigo[ultimoArray()].shift(); //Borra condición

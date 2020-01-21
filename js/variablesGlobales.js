@@ -159,6 +159,26 @@ var robot = {
     // --------------------------------------------------------
 
 
+    compruebaMinaSiguiente: function () {
+        switch (this.direccion) {
+            case 0: // Arriba
+                return tableroVirtual[this.y - 1 == -1 ? 0 : this.y - 1][this.x] == "📍";
+
+            case 1: // Izquierda
+                return tableroVirtual[this.y][this.x - 1] == "📍";
+
+            case 2: // Abajo
+                return tableroVirtual[this.y + 1][this.x] == "📍";
+
+            case 3: // Derecha
+                return tableroVirtual[this.y][this.x + 1] == "📍";
+        }
+    },
+
+
+    // --------------------------------------------------------
+
+
     desactivaMina: function () {
         if (this.compruebaMina()) {
             let contadorMinas = document.getElementById('contadorMinas');

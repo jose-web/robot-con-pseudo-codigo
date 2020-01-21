@@ -20,6 +20,8 @@ function compruebaSintaxis($codigo) {
 
                 if (arrayTexto[0] == "then")
                     arrayTexto.shift();
+                else if (arrayTexto[1] == "then")
+                    arrayTexto.splice(1, 1);
 
             } else if (compruebaTipoErrorIf == 2) {
                 mostrarConsola("falta el 'then' en el '" + arrayTexto[0] + "'");
@@ -111,14 +113,22 @@ function compruebaSintaxisBucleIF($codigo) {
         let numBucle = $codigo.length - 1;
 
         if (arrayTexto[0] == "while") {
-            for (let o = 0; o < condicion.length; o++) {
-                if (condicion[o] == arrayTexto[1]) {
-
-                    $codigo[numBucle].push(arrayTexto[1]);
-                    arrayTexto.shift();
-                    arrayTexto.shift();
-                    compruebaSintaxis($codigo[numBucle]);
-                    return 3;
+            if (arrayTexto[1] == "mine" && arrayTexto[2] == "next") {
+                $codigo[numBucle].push(arrayTexto[1] + " " + arrayTexto[2]);
+                arrayTexto.shift();
+                arrayTexto.shift();
+                arrayTexto.shift();
+                compruebaSintaxis($codigo[numBucle]);
+                return 3;
+            } else {
+                for (let o = 0; o < condicion.length; o++) {
+                    if (condicion[o] == arrayTexto[1]) {
+                        $codigo[numBucle].push(arrayTexto[1]);
+                        arrayTexto.shift();
+                        arrayTexto.shift();
+                        compruebaSintaxis($codigo[numBucle]);
+                        return 3;
+                    }
                 }
             }
             return 1;
@@ -136,19 +146,33 @@ function compruebaSintaxisBucleIF($codigo) {
             }
 
         } else if (arrayTexto[0] == "if") {
-            for (let o = 0; o < condicion.length; o++) {
-                if (condicion[o] == arrayTexto[1]) {
-
-                    if (arrayTexto[2] == "then") {
-                        $codigo[numBucle].push(1);
-                        $codigo[numBucle].push(arrayTexto[1]);
-                        arrayTexto.shift();
-                        arrayTexto.shift();
-                        arrayTexto.shift();
-                        compruebaSintaxis($codigo[numBucle]);
-                        return 3;
-                    } else {
-                        return 2;
+            if (arrayTexto[1] == "mine" && arrayTexto[2] == "next") {
+                if (arrayTexto[3] == "then") {
+                    $codigo[numBucle].push(1);
+                    $codigo[numBucle].push(arrayTexto[1] + " " + arrayTexto[2]);
+                    arrayTexto.shift();
+                    arrayTexto.shift();
+                    arrayTexto.shift();
+                    arrayTexto.shift();
+                    compruebaSintaxis($codigo[numBucle]);
+                    return 3;
+                } else {
+                    return 2;
+                }
+            } else {
+                for (let o = 0; o < condicion.length; o++) {
+                    if (condicion[o] == arrayTexto[1]) {
+                        if (arrayTexto[2] == "then") {
+                            $codigo[numBucle].push(1);
+                            $codigo[numBucle].push(arrayTexto[1]);
+                            arrayTexto.shift();
+                            arrayTexto.shift();
+                            arrayTexto.shift();
+                            compruebaSintaxis($codigo[numBucle]);
+                            return 3;
+                        } else {
+                            return 2;
+                        }
                     }
                 }
             }
@@ -168,7 +192,7 @@ function compruebaSintaxisVariables($codigo) {
         }
 
         //Comprueba que no sea una palabra clave
-        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then"]);
+        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then","next"]);
         for (let i = 0; i < compruebaTodo.length; i++) {
             for (let o = 0; o < compruebaTodo[i].length; o++) {
                 if (sentenciaDividida[0] == compruebaTodo[i][o]) {
@@ -189,7 +213,7 @@ function compruebaSintaxisVariables($codigo) {
         }
 
         //Comprueba que no sea una palabra clave
-        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then"]);
+        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then","next"]);
         for (let i = 0; i < compruebaTodo.length; i++) {
             for (let o = 0; o < compruebaTodo[i].length; o++) {
                 if (arrayTexto[0] == compruebaTodo[i][o]) {
