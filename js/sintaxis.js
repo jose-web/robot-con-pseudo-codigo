@@ -1,12 +1,13 @@
 
 function compruebaSintaxis($codigo) {
-    this.sentencia = ["a", "tl", "tr", "deact","show"];
+    this.sentencia = ["a", "tl", "tr", "deact", "show"];
     this.condicion = ["nb", "mine", "block", "nw"];
     this.bucleIf = ["while", "for", "if"];
     this.cuentaEnd = $codigo.length == 0 ? 0 : cuentaEnd;
     this.error = $codigo.length == 0 ? false : error;
     this.contadorExistenciaSentencia = $codigo.length == 0 ? 0 : contadorExistenciaSentencia;
     this.variables = $codigo.length == 0 ? new Array() : variables;
+    this.salirBucleIf == 0 ? 0 : this.salirBucleIf;
 
     let compruebaTipoErrorIf;
     let compruebaTipoVariable;
@@ -34,7 +35,10 @@ function compruebaSintaxis($codigo) {
         } else if (cuentaEnd > 0 && arrayTexto[0] == "end") {
             arrayTexto.shift();
             cuentaEnd--;
-            return false;
+            
+            if (this.salirBucleIf > 0)
+                this.salirBucleIf--;
+                return false;
 
         } else if ((compruebaTipoVariable = compruebaSintaxisVariables($codigo)) && compruebaTipoVariable != -1) {
             if (compruebaTipoVariable == 2) { // Declaración separado
@@ -118,6 +122,7 @@ function compruebaSintaxisBucleIF($codigo) {
                 arrayTexto.shift();
                 arrayTexto.shift();
                 arrayTexto.shift();
+                this.salirBucleIf++;
                 compruebaSintaxis($codigo[numBucle]);
                 return 3;
             } else {
@@ -126,6 +131,7 @@ function compruebaSintaxisBucleIF($codigo) {
                         $codigo[numBucle].push(arrayTexto[1]);
                         arrayTexto.shift();
                         arrayTexto.shift();
+                        this.salirBucleIf++;
                         compruebaSintaxis($codigo[numBucle]);
                         return 3;
                     }
@@ -138,7 +144,7 @@ function compruebaSintaxisBucleIF($codigo) {
                 $codigo[numBucle].push(arrayTexto[1]);
                 arrayTexto.shift();
                 arrayTexto.shift();
-
+                this.salirBucleIf++;
                 compruebaSintaxis($codigo[numBucle]);
                 return 3;
             } else {
@@ -154,6 +160,7 @@ function compruebaSintaxisBucleIF($codigo) {
                     arrayTexto.shift();
                     arrayTexto.shift();
                     arrayTexto.shift();
+                    this.salirBucleIf++;
                     compruebaSintaxis($codigo[numBucle]);
                     return 3;
                 } else {
@@ -168,6 +175,7 @@ function compruebaSintaxisBucleIF($codigo) {
                             arrayTexto.shift();
                             arrayTexto.shift();
                             arrayTexto.shift();
+                            this.salirBucleIf++;
                             compruebaSintaxis($codigo[numBucle]);
                             return 3;
                         } else {
@@ -192,7 +200,7 @@ function compruebaSintaxisVariables($codigo) {
         }
 
         //Comprueba que no sea una palabra clave
-        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then","next"]);
+        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then", "next"]);
         for (let i = 0; i < compruebaTodo.length; i++) {
             for (let o = 0; o < compruebaTodo[i].length; o++) {
                 if (sentenciaDividida[0] == compruebaTodo[i][o]) {
@@ -213,7 +221,7 @@ function compruebaSintaxisVariables($codigo) {
         }
 
         //Comprueba que no sea una palabra clave
-        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then","next"]);
+        let compruebaTodo = new Array(sentencia.slice(), bucleIf.slice(), condicion.slice(), ["then", "next"]);
         for (let i = 0; i < compruebaTodo.length; i++) {
             for (let o = 0; o < compruebaTodo[i].length; o++) {
                 if (arrayTexto[0] == compruebaTodo[i][o]) {
