@@ -39,7 +39,8 @@ function compruebaBucleIf() {
             } else if (segundoParametro != "nb"
                 && segundoParametro != "mine"
                 && segundoParametro != "block"
-                && segundoParametro != "nw") { // FOR
+                && segundoParametro != "nw"
+                && segundoParametro != "mine next") { // FOR
 
                 arrayCodigo[ultimoArray()][0].shift();
                 let copia = arrayCodigo[ultimoArray()][0].slice();
@@ -125,6 +126,11 @@ function compruebaSentencias() {
             robot.desactivaMina();
             arrayCodigo[ultimoArray()].shift();
             return false;
+
+        case "show":
+            robot.muestraInterrogante();
+            arrayCodigo[ultimoArray()].shift();
+            return true;
     }
     arrayCodigo[ultimoArray()].shift();
     return false;

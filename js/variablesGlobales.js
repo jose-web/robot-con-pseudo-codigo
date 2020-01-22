@@ -183,7 +183,8 @@ var robot = {
         if (this.compruebaMina()) {
             let contadorMinas = document.getElementById('contadorMinas');
             let numeroContadorMinas = contadorMinas.getElementsByTagName('span')[0];
-            numeroContadorMinas.innerHTML--;
+            if (numeroContadorMinas.innerHTML != 0)
+                numeroContadorMinas.innerHTML--
 
             tableroVirtual[this.y][this.x] = "";
         }
@@ -207,6 +208,85 @@ var robot = {
             case 3: //Derecha
                 return this.x == 14;
 
+        }
+    },
+    muestraInterrogante: function () {
+        let tabla = document.getElementById("tabla");
+        let filas = tabla.getElementsByClassName('fila-casilla');
+        let casillas = filas[this.y].getElementsByClassName('casilla');
+        let obstaculos = ["🌲", "🗿", "🏰", "🏠"];
+
+        switch (this.direccion) {
+            case 0: // Arriba
+                if (tableroVirtual[this.y - 1 == -1 ? 0 : this.y - 1][this.x] == "❓") {
+                    switch (Math.trunc(Math.random() * 2)) {
+                        case 0:
+                            let obstaculo = obstaculos[Math.trunc(Math.random() * (obstaculos.length))];
+                            tableroVirtual[this.y - 1 == -1 ? 0 : this.y - 1][this.x] = obstaculo;
+                            casillas[this.x].innerHTML = obstaculo;
+                            break;
+                        case 1:
+                            tableroVirtual[this.y - 1 == -1 ? 0 : this.y - 1][this.x] = "📍";
+                            casillas[this.x].innerHTML = "📍";
+                            break;
+
+                    }
+                }
+                break;
+
+            case 1: // Izquierda
+                if (tableroVirtual[this.y][this.x - 1] == "❓") {
+                    switch (Math.trunc(Math.random() * 2)) {
+                        case 0:
+                            let obstaculo = obstaculos[Math.trunc(Math.random() * (obstaculos.length))];
+                            tableroVirtual[this.y][this.x - 1] = obstaculo;
+                            casillas = filas[this.y + 1].getElementsByClassName('casilla');
+                            casillas[this.x - 1].innerHTML = obstaculo;
+                            break;
+                        case 1:
+                            tableroVirtual[this.y][this.x - 1] = "📍";
+                            casillas = filas[this.y + 1].getElementsByClassName('casilla');
+                            casillas[this.x - 1].innerHTML = "📍";
+
+                    }
+                }
+                break;
+
+            case 2: // Abajo
+                if (tableroVirtual[this.y + 1][this.x] == "❓") {
+                    switch (Math.trunc(Math.random() * 2)) {
+                        case 0:
+                            let obstaculo = obstaculos[Math.trunc(Math.random() * (obstaculos.length))];
+                            tableroVirtual[this.y + 1][this.x] = obstaculo;
+                            casillas = filas[this.y + 2].getElementsByClassName('casilla');
+                            casillas[this.x].innerHTML = obstaculo;
+                            break;
+                        case 1:
+                            tableroVirtual[this.y + 1][this.x] = "📍";
+                            casillas = filas[this.y + 2].getElementsByClassName('casilla');
+                            casillas[this.x].innerHTML = "📍";
+
+                    }
+                }
+                break;
+
+            case 3: // Derecha
+                if (tableroVirtual[this.y][this.x + 1] == "❓") {
+                    switch (Math.trunc(Math.random() * 2)) {
+                        case 0:
+                            let obstaculo = obstaculos[Math.trunc(Math.random() * (obstaculos.length))];
+                            tableroVirtual[this.y][this.x + 1] = obstaculo;
+                            casillas = filas[this.y + 1].getElementsByClassName('casilla');
+                            casillas[this.x + 1].innerHTML = obstaculo;
+                            break;
+                        case 1:
+                            tableroVirtual[this.y][this.x + 1] = "📍";
+                            casillas = filas[this.y + 1].getElementsByClassName('casilla');
+                            casillas[this.x + 1].innerHTML = "📍";
+
+                    }
+                }
+                break;
         }
     }
 

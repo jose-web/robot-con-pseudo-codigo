@@ -134,7 +134,7 @@ window.onload = function () {
         nuevoTextoColor = nuevoTextoColor.replace(/while|for|if|then|end|print/gi, "<textoColor style='color:blue'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/0|1|2|3|4|5|6|7|8|9/g, "<textoColor style='color:brown'><b>$&</b></textoColor>");
         nuevoTextoColor = nuevoTextoColor.replace(/nb|mine|next|block|nw/gi, "<textoColor style='color:violet'><b>$&</b></textoColor>");
-        nuevoTextoColor = nuevoTextoColor.replace(/a|tl|tr|deact/gi, "<textoColor style='color:green'><b>$&</b></textoColor>");
+        nuevoTextoColor = nuevoTextoColor.replace(/a|tl|tr|deact|show/gi, "<textoColor style='color:green'><b>$&</b></textoColor>");
 
         if (nuevoTextoColor.trim() == "")
             document.getElementById("textoColor").innerHTML = "<span style='color:gray;'>Escriba aquí</span>";

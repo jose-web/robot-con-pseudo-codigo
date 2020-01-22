@@ -1,6 +1,6 @@
 
 function compruebaSintaxis($codigo) {
-    this.sentencia = ["a", "tl", "tr", "deact"];
+    this.sentencia = ["a", "tl", "tr", "deact","show"];
     this.condicion = ["nb", "mine", "block", "nw"];
     this.bucleIf = ["while", "for", "if"];
     this.cuentaEnd = $codigo.length == 0 ? 0 : cuentaEnd;
