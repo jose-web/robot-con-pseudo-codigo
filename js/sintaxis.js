@@ -7,7 +7,7 @@ function compruebaSintaxis($codigo) {
     this.error = $codigo.length == 0 ? false : error;
     this.contadorExistenciaSentencia = $codigo.length == 0 ? 0 : contadorExistenciaSentencia;
     this.variables = $codigo.length == 0 ? new Array() : variables;
-    this.salirBucleIf == 0 ? 0 : this.salirBucleIf;
+    this.salirBucleIf = typeof salirBucleIf == "undefined" ? 0 : salirBucleIf;
 
     let compruebaTipoErrorIf;
     let compruebaTipoVariable;
@@ -35,10 +35,11 @@ function compruebaSintaxis($codigo) {
         } else if (cuentaEnd > 0 && arrayTexto[0] == "end") {
             arrayTexto.shift();
             cuentaEnd--;
-            
-            if (this.salirBucleIf > 0)
-                this.salirBucleIf--;
+
+            if (salirBucleIf > 0) {
+                salirBucleIf--;
                 return false;
+            }
 
         } else if ((compruebaTipoVariable = compruebaSintaxisVariables($codigo)) && compruebaTipoVariable != -1) {
             if (compruebaTipoVariable == 2) { // Declaración separado
@@ -92,8 +93,7 @@ function compruebaSintaxis($codigo) {
             error = true;
             cuentaEnd = 0;
 
-
-        } else if (contadorExistenciaSentencia == 2 && arrayTexto.length > 0) {
+        } else if (contadorExistenciaSentencia > 1 && arrayTexto.length > 0) {
             mostrarConsola("La sentencia '" + arrayTexto[0] + "' no existe ");
             error = true;
             arrayTexto.shift();

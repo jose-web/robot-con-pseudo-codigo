@@ -33,7 +33,7 @@ function adivinaLinea() {
 
     while (copiaArrayTexto.length > 0 && typeof (textoOriginal[textoOriginal.length - 1]) != "undefined") {
         cuentaSaltoLinea = 0;
-        inicioPalabra = textoOriginal[textoOriginal.length - 1].indexOf(copiaArrayTexto[copiaArrayTexto.length - 1]);
+        inicioPalabra = textoOriginal[textoOriginal.length - 1].lastIndexOf(copiaArrayTexto[copiaArrayTexto.length - 1]);
 
         textoOriginal[textoOriginal.length - 1] = textoOriginal[textoOriginal.length - 1].slice(0, inicioPalabra);
 
