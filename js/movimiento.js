@@ -69,7 +69,7 @@ function compruebaBucleIf() {
 ------------------------------------------------*/
 function compruebaVariables() {
 
-    if (arrayCodigo[ultimoArray()][0].indexOf("=") > 0) {
+    if (typeof arrayCodigo[ultimoArray()][0] != "undefined" && arrayCodigo[ultimoArray()][0].indexOf("=") > 0) {
         let nuevaVariable = arrayCodigo[ultimoArray()][0].split("=");
         variables[nuevaVariable[0]] = nuevaVariable[1];
         pintaVariables();

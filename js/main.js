@@ -142,6 +142,10 @@ window.onload = function () {
             document.getElementById("textoColor").innerHTML = nuevoTextoColor;
     };
 
+    $("#velocidad").change(function () {
+        reloj.velocidad = $("#velocidad option:selected").val();
+    });
+
     redimensionaTabla();
     recogerMapasAjax();
     pintarTablero();
