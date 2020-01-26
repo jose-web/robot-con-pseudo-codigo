@@ -18,11 +18,17 @@ function iniciar() {
     codigo = new Array();
     estela = document.getElementById('estela').checked;
 
-    textoMinuscula = document.getElementById("texto").value.toLowerCase();
+    textoMinuscula = texto.getValue().toLowerCase();
 
     //Elimina los saltos de línea
     while (textoMinuscula.indexOf("\n") != -1) {
         textoMinuscula = textoMinuscula.replace("\n", " ")
+    }
+
+    //Elimina las tabulaciones
+    while (textoMinuscula.indexOf("\t") != -1) {
+        console.log("a");
+        textoMinuscula = textoMinuscula.replace("\t", " ")
     }
 
     //Elimina los dobles espacios
@@ -95,7 +101,7 @@ Carga la página
 window.onload = function () {
     robot.spawn();
 
-    document.getElementById("texto").value = "";
+    texto.setValue("");
 
     /*
     document.getElementById("ver").onclick = function () {
@@ -127,21 +133,6 @@ window.onload = function () {
         nivelTablero();
     };
 
-    document.getElementById("texto").onkeyup = function () {
-        let textoSinColor = this.value.toString();
-        let nuevoTextoColor = textoSinColor;
-
-        nuevoTextoColor = nuevoTextoColor.replace(/while|for|if|then|end|print/gi, "<textoColor style='color:blue'><b>$&</b></textoColor>");
-        nuevoTextoColor = nuevoTextoColor.replace(/0|1|2|3|4|5|6|7|8|9/g, "<textoColor style='color:brown'><b>$&</b></textoColor>");
-        nuevoTextoColor = nuevoTextoColor.replace(/nb|mine|next|block|nw/gi, "<textoColor style='color:violet'><b>$&</b></textoColor>");
-        nuevoTextoColor = nuevoTextoColor.replace(/a|tl|tr|deact|show/gi, "<textoColor style='color:green'><b>$&</b></textoColor>");
-
-        if (nuevoTextoColor.trim() == "")
-            document.getElementById("textoColor").innerHTML = "<span style='color:gray;'>Escriba aquí</span>";
-        else
-            document.getElementById("textoColor").innerHTML = nuevoTextoColor;
-    };
-
     $("#velocidad").change(function () {
         reloj.velocidad = $("#velocidad option:selected").val();
     });
@@ -150,6 +141,31 @@ window.onload = function () {
     recogerMapasAjax();
     pintarTablero();
 };
+CodeMirror.defineMode("addColor", function () {
+    return {
+        token: function (stream, state) {
+            if (stream.match(/while/i) || stream.match(/for/i) || stream.match(/if/i) || stream.match(/then/i) || stream.match(/end/i) || stream.match(/print/i)) {
+                return "azul";
+            } else if (stream.match(/nb/i) || stream.match(/mine\snext/i) || stream.match(/mine/i) || stream.match(/block/i) || stream.match(/nw/i)) {
+                return "violeta";
+            } else if (stream.match(/a/i) || stream.match(/tl/i) || stream.match(/tr/i) || stream.match(/deact/i) || stream.match(/show/i)) {
+                return "verde";
+            } else if (stream.match(/\d/i)) {
+                return "rojo";
+            } else {
+                stream.next();
+                return null;
+            }
+        }
+    };
+});
+
+let texto = CodeMirror.fromTextArea(document.getElementById("texto"), {
+    lineNumbers: true,
+    mode: "addColor",
+    lineWrapping: true
+});
+texto.setSize("100%", "100%");
 
 $(window).resize(function () {
     redimensionaTabla();

@@ -13,12 +13,18 @@ function copiaArray($array) {
 
 function adivinaLinea() {
 
-    let textoOriginal = document.getElementById("texto").value.toLowerCase();
+    let textoOriginal = texto.getValue().toLowerCase();
     let inicioPalabra;
     let cuentaSaltoLinea = 0;
     let copiaArrayTexto = arrayTexto.slice();
 
     textoOriginal = textoOriginal.split("\n");
+
+    //Elimina las tabulaciones
+    while (textoMinuscula.indexOf("\t") != -1) {
+        console.log("a");
+        textoMinuscula = textoMinuscula.replace("\t", " ")
+    }
 
     for (let i = 0; i < textoOriginal.length; i++) {
         //Elimina los dobles espacios
@@ -44,7 +50,7 @@ function adivinaLinea() {
             cuentaSaltoLinea++;
         }
     }
-    return inicioPalabra != 0 ? textoOriginal.length - 1 : cuentaSaltoLinea > 1 ? textoOriginal.length + cuentaSaltoLinea - 1 : textoOriginal.length;
+    return (inicioPalabra != 0 ? textoOriginal.length - 1 : cuentaSaltoLinea > 1 ? textoOriginal.length + cuentaSaltoLinea - 1 : textoOriginal.length) + 1;
 }
 
 function mostrarConsola($error) {

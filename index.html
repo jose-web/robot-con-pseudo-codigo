@@ -8,9 +8,10 @@
     <title>Robot</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/codemirror.css">
 </head>
 
-<body>
+<body class="pr-0">
     <div class="container-fluid bg-light">
 
         <!--BOTONES ARRIBA-->
@@ -58,10 +59,9 @@
             </div>
 
             <!--COLUMNA DERECHA-->
-            <div class="col-md-3 order-2 order-md-3">
-                <div class="row h-100">
-                    <pre id="textoColor"><span style="color:gray;">Escriba aquí</span></pre>
-                    <textarea class="col-12 h-100" id="texto" spellcheck="false"></textarea>
+            <div id="colDerecha" class="col-md-3 order-2 order-md-3">
+                <div class="h-100">
+                    <textarea id="texto"></textarea>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
     </div>
 
     <!--AYUDA-->
-    <div class="modal fade modalAyuda" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade modalAyuda pr-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -145,7 +145,7 @@
     </div>
 
     <!--CONFIGURACIÓN-->
-    <div class="modal fade modalConfiguracion" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div class="modal fade modalConfiguracion pr-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -180,6 +180,7 @@
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/confetti.min.js"></script>
+    <script src="js/codemirror.js"></script>
     <script src="js/main.js"></script>
 </body>
 

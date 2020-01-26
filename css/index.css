@@ -45,32 +45,13 @@ body {
     color: green;
 }
 
-#texto, #textoColor {
-    vertical-align: middle;
-    line-height: normal;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
-    padding: 1em;
-    min-height: 3em;
-    white-space: pre-wrap;
-    white-space: -moz-pre-wrap;
-    white-space: -pre-wrap;
-    white-space: -o-pre-wrap;
-    word-wrap: break-word;
+#colDerecha{
+    min-height:5em;
+    border-left:0.01em solid gray;
+    font-weight: bold;
 }
 
-#textoColor {
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    border: 0.1em solid gray;
-}
-
-#texto {
-    position: absolute;
-    color: transparent;
-    background-color: transparent;
-    caret-color: black;
-    border: 0;
-    resize: none;
-}
+.cm-azul{color:blue}
+.cm-violeta{color:violet}
+.cm-verde{color:green}
+.cm-rojo{color:red}
