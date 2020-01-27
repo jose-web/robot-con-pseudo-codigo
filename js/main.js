@@ -133,6 +133,16 @@ window.onload = function () {
         nivelTablero();
     };
 
+    $("#inicioArriba").click(function () {
+        $("body").css({ "overflow": "initial" });
+        $("#inicio").fadeOut();
+    });
+
+    $("#inicioAbajo").click(function () {
+        $("body").css({ "overflow": "initial" });
+        $("#inicio").fadeOut();
+    });
+
     $("#velocidad").change(function () {
         reloj.velocidad = $("#velocidad option:selected").val();
     });

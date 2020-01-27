@@ -1,3 +1,56 @@
+/*Página de inicio*/
+
+#inicio {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+}
+
+#inicioArriba {
+    background-color: #218838;
+}
+
+#inicioAbajo {
+    background-color: #e0a800;
+}
+
+.centro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+    cursor: pointer;
+    color: white;
+    width: 100vw;
+    height: 50vh;
+    transition: font-size 0.5s, text-shadow 0.5s;
+}
+
+.centro:hover {
+    text-shadow: 0 0 0.1em black;
+    font-size: 3.5em;
+}
+
+#inicioCentro {
+    position: absolute;
+    width: 15em;
+    height: 15em;
+    top: 50%;
+    left: 50%;
+    margin-top: -7.5em;
+    margin-left: -7.5em;
+    border-radius: 100%;
+    background: url("../img/demeter.png");
+    /*Todos los derechos de esta imágen son de la unión europea*/
+    background-size: cover;
+    box-shadow: 0 0 0.5em black;
+}
+
+/*Tabla*/
+
 #tabla {
     width: 100%;
 }
@@ -19,13 +72,18 @@
     width: 85.8%;
 }
 
+/*Body*/
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-height: 100vh;
     background: url("../img/bg.png");
+    overflow: hidden;
 }
+
+/*Botón estela*/
 
 #estela {
     display: none;
@@ -45,13 +103,28 @@ body {
     color: green;
 }
 
-#colDerecha{
-    min-height:5em;
-    border-left:0.01em solid gray;
+/*Columna derecha*/
+
+#colDerecha {
+    min-height: 5em;
+    border-left: 0.01em solid gray;
     font-weight: bold;
 }
 
-.cm-azul{color:blue}
-.cm-violeta{color:violet}
-.cm-verde{color:green}
-.cm-rojo{color:red}
+/*Colores comandos*/
+
+.cm-azul {
+    color: blue
+}
+
+.cm-violeta {
+    color: violet
+}
+
+.cm-verde {
+    color: green
+}
+
+.cm-rojo {
+    color: red
+}
