@@ -103,16 +103,6 @@ window.onload = function () {
 
     texto.setValue("");
 
-    /*
-    document.getElementById("ver").onclick = function () {
-        document.getElementById("pantallaDeInicio").style.top = '-100%';
-        setTimeout(function () {
-            document.getElementById("pantallaDeInicio").style.display = 'none';
-            document.getElementsByTagName('html')[0].style.overflow = 'auto';
-        }, 1000
-        );
-    }
-*/
     document.getElementById("btniniciar").onclick = function () {
         iniciar();
     };
@@ -134,22 +124,138 @@ window.onload = function () {
     };
 
     $("#inicioArriba").click(function () {
+        redimensionaTabla();
+        recogerMapasAjax();
         $("body").css({ "overflow": "initial" });
         $("#inicio").fadeOut();
+        $("#creaNivel").addClass("d-none");
     });
 
     $("#inicioAbajo").click(function () {
+        redimensionaTabla();
+
         $("body").css({ "overflow": "initial" });
+        $(".ocultar").addClass("d-none");
+        $("#contenedorElementos").removeClass("d-none");
         $("#inicio").fadeOut();
+
+        $('.draggable').draggable({
+            revert: "invalid",
+            stack: ".draggable",
+            helper: 'clone'
+        });
+        $('.droppable').droppable({
+            accept: ".draggable",
+            drop: function (event, ui) {
+                var droppable = $(this);
+                var draggable = ui.draggable;
+                // Move draggable into droppable
+                var drag = $('.droppable').has(ui.draggable).length ? draggable : draggable.clone().draggable({
+                    revert: "invalid",
+                    stack: ".draggable",
+                    helper: 'clone'
+                });
+                if ($(this).html() == "")
+                    drag.appendTo(droppable);
+            }
+        });
+
+        $("#btnCreaNivel").click(function () {
+            let mapaEnLinea = "";
+            let contador = 0;
+            let nuevoMapa = $("#tabla").children("div").children(".droppable");
+            for (let i = 0; i < nuevoMapa.length; i++) {
+
+                if (nuevoMapa[i].innerHTML === "") {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML === "") {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/a|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/a|";
+                        contador = 0;
+                    }
+                } else if (nuevoMapa[i].innerHTML.indexOf("📍") != -1) {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML.indexOf("📍") != -1) {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/b|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/b|";
+                        contador = 0;
+                    }
+                } else if (nuevoMapa[i].innerHTML.indexOf("❓") != -1) {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML.indexOf("❓") != -1) {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/c|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/c|";
+                        contador = 0;
+                    }
+                } else if (nuevoMapa[i].innerHTML.indexOf("🌲") != -1) {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML.indexOf("🌲") != -1) {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/d|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/d|";
+                        contador = 0;
+                    }
+                } else if (nuevoMapa[i].innerHTML.indexOf("🗿") != -1) {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML.indexOf("🗿") != -1) {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/e|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/e|";
+                        contador = 0;
+                    }
+                } else if (nuevoMapa[i].innerHTML.indexOf("🏰") != -1) {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML.indexOf("🏰") != -1) {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/f|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/f|";
+                        contador = 0;
+                    }
+                } else if (nuevoMapa[i].innerHTML.indexOf("🏠") != -1) {
+                    if (typeof nuevoMapa[i + 1] != "undefined" && nuevoMapa[i + 1].innerHTML.indexOf("🏠") != -1) {
+                        contador++;
+                        if (i + 1 == nuevoMapa.length) {
+                            mapaEnLinea += contador + 1 + "/g|";
+                            contador = 0;
+                        }
+                    } else {
+                        mapaEnLinea += contador + 1 + "/g|";
+                        contador = 0;
+                    }
+                }
+                
+            }
+            $("#urlNuevoMapa").html(location.href+"?mapa="+mapaEnLinea);
+            $("#urlNuevoMapa").attr("href",location.href+"?mapa="+mapaEnLinea);
+
+        });
     });
 
     $("#velocidad").change(function () {
         reloj.velocidad = $("#velocidad option:selected").val();
     });
 
-    redimensionaTabla();
-    recogerMapasAjax();
-    pintarTablero();
 };
 CodeMirror.defineMode("addColor", function () {
     return {

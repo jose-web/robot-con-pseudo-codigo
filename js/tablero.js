@@ -40,7 +40,7 @@ function pintarTablero() {
         tablero += "<div class='fila-casilla'>";
 
         for (let o = 0; o < 15; o++) {
-            tablero += "<div class='casilla border border-dark'>" + (typeof tableroVirtual[i][o] == "undefined" ? "" : tableroVirtual[i][o]) + "</div>";
+            tablero += "<div class='casilla border border-dark droppable'>" + (typeof tableroVirtual[i][o] == "undefined" ? "" : tableroVirtual[i][o]) + "</div>";
         }
         tablero += "</div>";
     }
