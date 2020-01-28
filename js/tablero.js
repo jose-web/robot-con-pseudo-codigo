@@ -1,9 +1,12 @@
-function nivelTablero() {
+function nivelTablero($nuevoMapa = false) {
     let contadorMinas = document.getElementById('contadorMinas');
     let numeroContadorMinas = contadorMinas.getElementsByTagName('span')[0];
     let numeroMinas = 0;
 
-    tableroOriginal = mapas[nivel - 1];
+    if (!$nuevoMapa)
+        tableroOriginal = mapas[nivel - 1];
+    else
+        tableroOriginal = mapas[1];
 
     for (let i = 0; i < tableroOriginal.length; i++) {
         tableroVirtual[i] = tableroOriginal[i].slice();

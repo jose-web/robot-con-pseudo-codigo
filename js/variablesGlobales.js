@@ -13,7 +13,10 @@ var robot = {
         this.y = 11;
         this.direccion = 0;
 
-        nivelTablero();
+        if (location.href.indexOf("?mapa=") != -1)
+            nivelTablero(true);
+        else
+            nivelTablero();
     },
 
     // --------------------------------------------------------

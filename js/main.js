@@ -27,7 +27,6 @@ function iniciar() {
 
     //Elimina las tabulaciones
     while (textoMinuscula.indexOf("\t") != -1) {
-        console.log("a");
         textoMinuscula = textoMinuscula.replace("\t", " ")
     }
 
@@ -244,10 +243,10 @@ window.onload = function () {
                         contador = 0;
                     }
                 }
-                
+
             }
-            $("#urlNuevoMapa").html(location.href+"?mapa="+mapaEnLinea);
-            $("#urlNuevoMapa").attr("href",location.href+"?mapa="+mapaEnLinea);
+            $("#urlNuevoMapa").html(location.href + "?mapa=" + mapaEnLinea);
+            $("#urlNuevoMapa").attr("href", location.href + "?mapa=" + mapaEnLinea);
 
         });
     });
@@ -255,6 +254,70 @@ window.onload = function () {
     $("#velocidad").change(function () {
         reloj.velocidad = $("#velocidad option:selected").val();
     });
+
+    if (location.href.indexOf("?mapa=") != -1) {
+        $("#inicio, #creaNivel, #nivelAnterior, #siguienteNivel").addClass("d-none");
+        $("#nombreNivel").html("Nivel hecho con el creador de mapas");
+        let nuevoMapa = location.href.split("?mapa=");
+        nuevoMapa = nuevoMapa[1].split("|");
+        for (let i = 0; i < nuevoMapa.length; i++) {
+            nuevoMapa[i] = nuevoMapa[i].split("/");
+        }
+        //📍 ❓ 🌲 🗿 🏰 🏠
+
+        let contador = nuevoMapa[0][0];
+
+        for (let i = 0; i < mapas.length; i++) {
+            for (let o = 0; o < mapas[i].length; o++) {
+
+                if (contador != 0) {
+                    contador--;
+                    switch (nuevoMapa[0][1]) {
+                        case "b":
+                            mapas[i][o] = "📍";
+                            break;
+
+                        case "c":
+                            mapas[i][o] = "❓";
+                            break;
+
+                        case "d":
+                            mapas[i][o] = "🌲";
+                            break;
+
+                        case "e":
+                            mapas[i][o] = "🗿";
+                            break;
+
+                        case "f":
+                            mapas[i][o] = "🏰";
+                            break;
+
+                        case "g":
+                            mapas[i][o] = "🏠";
+                            break;
+
+                    }
+
+                    if (contador == 0) {
+                        nuevoMapa.shift();
+                        contador = nuevoMapa[0][0];
+                    }
+                }
+
+
+
+            }
+        }
+
+        let mapaNuevo = copiaArray(mapas);
+
+        mapas = new Array();
+        mapas[1] = mapaNuevo;
+
+        nivelTablero(true);
+        redimensionaTabla();
+    }
 
 };
 CodeMirror.defineMode("addColor", function () {
