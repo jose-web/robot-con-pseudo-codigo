@@ -84,13 +84,23 @@ var robot = {
                     if (tableroVirtual[i][o] == "📍") {
                         contadorMinasFinal++;
                     }
-
                 }
-
             }
 
-            if (contadorMinasFinal > 0) {
-                consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p><p class='mb-0' style='color:red'>Faltan " + contadorMinasFinal + " minas por desactivar 😰</p>";
+            let contadorInterrogantesFinal = 0;
+            for (let i = 0; i < tableroVirtual.length; i++) {
+                for (let o = 0; o < tableroVirtual[i].length; o++) {
+                    if (tableroVirtual[i][o] == "❓") {
+                        contadorInterrogantesFinal++;
+                    }
+                }
+            }
+
+            if (contadorMinasFinal > 0 || contadorInterrogantesFinal > 0) {
+                textoContadorMinasFinal = contadorMinasFinal > 0 ? "<p class='mb-0' style='color:red'>Faltan " + contadorMinasFinal + (contadorMinasFinal == 1 ? " mina " : " minas ") + "por desactivar 😰</p>" : "";
+                textoContadorInterrogantesFinal = contadorInterrogantesFinal > 0 ? "<p class='mb-0' style='color:red'>Faltan " + contadorInterrogantesFinal + (contadorInterrogantesFinal == 1 ? " interrogante " : " interrogantes ") + "por mirar 😰</p>" : "";
+
+                consola.innerHTML += "<p class='mb-0' style='color:blue'>• FIN DE EJECUCIÓN •</p>" + textoContadorMinasFinal + textoContadorInterrogantesFinal;
 
             } else {
                 if (!estela)

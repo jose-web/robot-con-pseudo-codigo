@@ -45,7 +45,6 @@ function iniciar() {
     }
 
     let buenaSintaxis = compruebaSintaxis(codigo);
-    // console.log(buenaSintaxis, codigo);
     if (buenaSintaxis) {
         let consola = document.getElementById("consola");
         let listadoVariables = document.getElementById("listadoVariables");
@@ -256,6 +255,7 @@ window.onload = function () {
     });
 
     if (location.href.indexOf("?mapa=") != -1) {
+        $("body").css({ "overflow": "initial" });
         $("#inicio, #creaNivel, #nivelAnterior, #siguienteNivel").addClass("d-none");
         $("#nombreNivel").html("Nivel hecho con el creador de mapas");
         let nuevoMapa = location.href.split("?mapa=");

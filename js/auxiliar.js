@@ -22,7 +22,6 @@ function adivinaLinea() {
 
     //Elimina las tabulaciones
     while (textoMinuscula.indexOf("\t") != -1) {
-        console.log("a");
         textoMinuscula = textoMinuscula.replace("\t", " ")
     }
 
