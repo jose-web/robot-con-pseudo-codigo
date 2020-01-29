@@ -19,17 +19,24 @@
     </div>
     <div class="container-fluid bg-light">
 
+        <div class="row">
+            <button id="volver" class="col btn btn-dark border border-secondary rounded-0">Volver al menú
+                principal</button>
+            <button id="info" class="col btn btn-dark border border-secondary rounded-0" data-toggle="modal"
+                data-target="#modalInfo">Información</button>
+        </div>
+
         <!--BOTONES ARRIBA-->
         <div class="row ocultar">
             <div class="col-12">
                 <div class="row">
                     <button class="col-12 col-md-3 btn btn-warning rounded-0" data-toggle="modal"
-                        data-target=".modalAyuda">Ayuda</button>
+                        data-target="#modalAyuda">Ayuda</button>
                     <button id="nivelAnterior" class="col btn btn-primary rounded-0">Anterior</button>
                     <div id="nombreNivel" class="col btn btn-primary rounded-0 disabled">Nivel 1</div>
                     <button id="siguienteNivel" class="col btn btn-primary rounded-0">Siguiente</button>
-                    <button class="col-12 col-md-3 btn btn-success rounded-0" data-toggle="modal"
-                        data-target=".modalConfiguracion">Configuración</button>
+                    <button class="col-12 col-md-3 btn btn-success rounded-0 z-index-4" data-toggle="modal"
+                        data-target="#modalConfiguracion">Configuración</button>
                 </div>
             </div>
         </div>
@@ -84,7 +91,7 @@
 
         <!--BOTÓN INICIAR-->
         <div class="row ocultar">
-            <button id="btniniciar" class="col btn btn-success rounded-0">Iniciar</button>
+            <button id="btniniciar" class="col btn btn-success rounded-0 z-index-4">Iniciar</button>
         </div>
 
         <div id="creaNivel" class="row">
@@ -95,7 +102,7 @@
     </div>
 
     <!--AYUDA-->
-    <div class="modal fade modalAyuda pr-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div id="modalAyuda" class="modal fade pr-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -166,7 +173,7 @@
     </div>
 
     <!--CONFIGURACIÓN-->
-    <div class="modal fade modalConfiguracion pr-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    <div id="modalConfiguracion" class="modal fade pr-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -210,6 +217,41 @@
                 </div>
                 <div class="modal-body">
                     <a id="urlNuevoMapa"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Información-->
+    <div class="modal fade" id="modalInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">INFORMACIÓN</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Proyecto programado por:</strong> José de los santos ramos</p>
+                    <strong>Recursos externos utilizados:</strong>
+                    <ul>
+                        <li>Bootstrap</li>
+                        <li>jQuery</li>
+                        <li>jQuery UI</li>
+                        <li>confetti.js</li>
+                        <li>codemirror.js</li>
+                    </ul>
+
+                    <strong>Derechos de las imágenes usadas:</strong>
+                    <ul>
+                        <li>Imagen de fondo: Toptal Subtle Patterns</li>
+                        <li>Logo DEMETER y bandera de la unión europea: Unión europea</li>
+                    </ul>
+
+                    <p>DEMETER (Developing Enhanced MEthodology for Thematic Learning in Education using Real-world
+                        problem solving) es un proyecto diseñado por la unión europea</p>
                 </div>
             </div>
         </div>

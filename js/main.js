@@ -250,6 +250,10 @@ window.onload = function () {
         });
     });
 
+    $("#volver").click(function () {
+        location.href = location.href.split("?")[0];
+    });
+
     $("#velocidad").change(function () {
         reloj.velocidad = $("#velocidad option:selected").val();
     });

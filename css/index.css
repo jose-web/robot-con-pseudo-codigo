@@ -128,3 +128,9 @@ body {
 .cm-rojo {
     color: red
 }
+
+/*Otros*/
+
+.z-index-4 {
+    z-index: 4;
+}
