@@ -140,7 +140,13 @@ window.onload = function () {
         $('.draggable').draggable({
             revert: "invalid",
             stack: ".draggable",
-            helper: 'clone'
+            helper: 'clone',
+            start: function () {
+                $('.draggable').css("cursor", "grabbing");
+            },
+            stop: function () {
+                $('.draggable').css("cursor", "grab");
+            }
         });
         $('.droppable').droppable({
             accept: ".draggable",
@@ -151,10 +157,27 @@ window.onload = function () {
                 var drag = $('.droppable').has(ui.draggable).length ? draggable : draggable.clone().draggable({
                     revert: "invalid",
                     stack: ".draggable",
-                    helper: 'clone'
+                    helper: 'clone',
+                    start: function () {
+                        $('.draggable').css("cursor", "grabbing");
+                        $(this).addClass("seBorra");
+                        $(this).css("display", "none");
+                    },
+                    stop: function () {
+                        $('.draggable').css("cursor", "grab");
+                        $(this).css("display", "initial");
+                    }
                 });
                 if ($(this).html() == "")
                     drag.appendTo(droppable);
+            }
+        });
+
+        $('#eliminaDragAndDrop').droppable({
+            accept: ".seBorra",
+            drop: function (event, ui) {
+                var borrar = ui.draggable;
+                borrar.remove();
             }
         });
 

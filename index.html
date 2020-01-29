@@ -46,12 +46,13 @@
 
             <div id="contenedorElementos" class="col-12 d-none">
                 <div class="row col-12 d-flex justify-content-around">
-                    <span class="draggable">📍</span>
-                    <span class="draggable">❓</span>
-                    <span class="draggable">🌲</span>
-                    <span class="draggable">🗿</span>
-                    <span class="draggable">🏰 </span>
-                    <span class="draggable">🏠</span>
+                    <span class="draggable" title="Mina">📍</span>
+                    <span class="draggable" title="Interrogante">❓</span>
+                    <span class="draggable" title="Arbol">🌲</span>
+                    <span class="draggable" title="Moai">🗿</span>
+                    <span class="draggable" title="Castilo">🏰 </span>
+                    <span class="draggable" title="Casa">🏠</span>
+                    <span id="eliminaDragAndDrop" title="Basura">🗑️</span>
                 </div>
             </div>
 
@@ -113,7 +114,7 @@
                     </button>
                 </div>
 
-                <div class="row p-4">
+                <div class="modal-body row p-4">
 
                     <div class="col-12 col-md-4">
                         <p><strong>Significado iconos</strong></p>
@@ -259,8 +260,7 @@
 
     <!--SCRIPTS-->
     <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"
-        type="text/javascript"></script>
+    <script src="js/jquery-ui-1.11.4.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/confetti.min.js"></script>
     <script src="js/codemirror.js"></script>
