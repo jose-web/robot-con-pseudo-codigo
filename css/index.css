@@ -133,7 +133,6 @@ body {
     color: red
 }
 
-
 /*Crea tu mapa Drag and Drop*/
 
 #contenedorElementos>div {
@@ -170,9 +169,17 @@ body {
     z-index: 4;
 }
 
-.modal-body {
+.modal-body, .CodeMirror {
     -webkit-user-select: text;
     -moz-user-select: text;
     -khtml-user-select: text;
     -ms-user-select: text;
+}
+
+.CodeMirror-scroll {
+    cursor: text;
+}
+
+.CodeMirror-gutters{
+    cursor: default;
 }
