@@ -267,6 +267,8 @@ window.onload = function () {
                 }
 
             }
+            mapaEnLinea = mapaEnLinea == "165/a|" ? "Z404A03C8BA93" : mapaEnLinea;
+
             $("#urlNuevoMapa").html(location.href + "?mapa=" + mapaEnLinea);
             $("#urlNuevoMapa").attr("href", location.href + "?mapa=" + mapaEnLinea);
 
@@ -290,7 +292,6 @@ window.onload = function () {
         for (let i = 0; i < nuevoMapa.length; i++) {
             nuevoMapa[i] = nuevoMapa[i].split("/");
         }
-        //📍 ❓ 🌲 🗿 🏰 🏠
 
         let contador = nuevoMapa[0][0];
 
